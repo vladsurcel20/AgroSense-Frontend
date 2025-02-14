@@ -1,0 +1,95 @@
+.authpage {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh; 
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(252,252,252,0.7) 55%, rgba(254,254,254,0.2) 100%);
+    display: flex;
+    flex-direction: row;
+    color: black;
+
+}
+.formContainer{
+    width: 60%;
+    min-width: 300px;
+    height: 100%;
+    padding-left: 10%;
+    padding-top: 10%;
+}
+.form { 
+    min-width: 350px; 
+    width:50%;
+    /* height: 60%; */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10% 0 0 0;
+}
+
+.textField {
+    background-color: var(--input-background-color);
+    border-radius: 5px;
+    color: var(--secondary-text-color);
+}
+
+.photoContainer{
+    width:40%;
+    height:100%;
+    max-width: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo{
+   width:auto;
+   height: 100%;
+   object-fit: contain;
+}
+
+.secondaryText{
+    color: var(--secondary-text-color);
+}
+
+.secondaryText[id="rememberText"]{
+    cursor: pointer;
+}
+
+.formContainer input[type="checkbox"] {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.between {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.center{
+    margin: 0 auto;
+}
+
+.submitButton{
+    margin: 50px 0;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    outline: white;
+    background-color: var(--action-text-color);
+    color: white;
+    cursor: pointer;
+}
+
+.actionText{
+    color: var(--action-text-color);
+    cursor: pointer;
+}
+
+.actionText, .secondaryText {
+    font-size: 0.9rem;
+}
