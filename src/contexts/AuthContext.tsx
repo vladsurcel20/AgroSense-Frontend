@@ -1,12 +1,13 @@
-import React from 'react'
-import { createContext, useState, useEffect, ReactNode, useContext} from 'react'
+import React, { useEffect } from 'react'
+import { createContext, useState, ReactNode, useContext} from 'react'
 import { loginAPI, registerAPI } from '../services/AuthService';
+import { AxiosResponse } from 'axios';
 
 
 interface AuthContext{
     isLogged: boolean,
-    login: (email: string, password:string) => Promise<void>,
-    register: (firstName: string, lastName: string, email: string, password: string) => Promise<void>,
+    login: (email: string, password:string) =>  Promise<AxiosResponse | undefined>,
+    register: (firstName: string, lastName: string, email: string, password: string) => Promise<AxiosResponse | undefined>,
     logout: () => void
 }
 
@@ -16,24 +17,31 @@ export const AuthContext = createContext<AuthContext | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isLogged, setIsLogged] = useState<boolean>(false);
 
+    // const checkAuth = () => {
+    //   setIsLogged(!!token); // Dacă există, utilizatorul este logat
+    // };
+
+    // useEffect(() => {
+    //     checkAuth();
+    // }, []);
+
   
     const login = async (email: string, password: string) => {
         try {
-        const response = await loginAPI(email, password);
+          const response = await loginAPI(email, password);
         if (response) {
             setIsLogged(true);
+            return response;
         }
         } catch (error) {
-        console.error('Login failed', error);
+          console.error('Login failed', error);
         }
     };
 
     const register = async (firstName: string, lastName: string, email: string, password: string) => {
         try {
             const response = await registerAPI(firstName, lastName, email, password);
-            if (response) {
-                setIsLogged(true);
-            }
+            return response
         } catch (error) {
             console.error('Registration failed', error);
         }

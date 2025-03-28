@@ -1,5 +1,7 @@
-import React, { ReactEventHandler } from 'react'
-import {TextField} from '@mui/material'
+import React, { useState } from 'react'
+import { TextField, InputAdornment, Tooltip} from '@mui/material'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import styles from '../pages/Auth.module.css'
 
 interface Props{
@@ -10,6 +12,8 @@ interface Props{
 }
 
 const LoginForm = ({handleHasAccount, setEmail, setPassword, handleSubmitLogin}: Props) => {
+
+const [showPassword, setShowPassword] = useState<boolean>(false)
 
 
   return (
@@ -34,7 +38,7 @@ const LoginForm = ({handleHasAccount, setEmail, setPassword, handleSubmitLogin}:
         <TextField
           id="outlined-password-input"
           label="Password"
-          type="password"
+          type = {!showPassword ? "password" : "text"}
           autoComplete="current-password"
           variant="outlined"
           size="small"
@@ -42,6 +46,20 @@ const LoginForm = ({handleHasAccount, setEmail, setPassword, handleSubmitLogin}:
           sx={{mb: "1rem", color:"white" }}
           className={styles.textField}
           onChange={(e) => setPassword(e.target.value.trim())}
+          slotProps={{
+            input:{
+              endAdornment: (
+                <InputAdornment position="end" onClick={() => setShowPassword(!showPassword)}>
+                  <Tooltip title={showPassword ? "Hide password" : "Show password"} placement='bottom'>
+                    <FontAwesomeIcon 
+                      icon={showPassword ? faEyeSlash : faEye} 
+                      className={styles.clickableIcon}
+                    />
+                  </Tooltip>
+                </InputAdornment>
+              )
+            }
+          }}
           />
 
         <div className={styles.between}>

@@ -1,23 +1,29 @@
 import axios, { AxiosError } from "axios"
+import { toast } from "sonner"
 
-const baseUrl = "http://localhost:5173/api/auth"
+const baseUrl = "http://localhost:5000/api/auth"
 
 interface AuthResponse {
-    token: string
-}
+    message?: string; 
+  }
 
 
 export const loginAPI = async (email: string, password: string) => {
     try{
         const res = await axios.post<AuthResponse>(baseUrl + "/login", 
             {email, password},
-            { headers: { 'Content-Type': 'application/json' }}
+            { 
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            }
+
         )
-        return res
+        return res;
+        
     } catch (error) {
-        const err= error as AxiosError ;
-        if(err.response?.data){
-          alert(err.response.data);
+        const err = error as AxiosError<AuthResponse>;
+        if(err.response?.data?.message){
+          toast.error(err.response.data.message);
         } else {
           console.log(`Error: ${err.message}`);          
         }
@@ -29,13 +35,16 @@ export const registerAPI = async (firstName: string, lastName: string, email: st
     try{
         const res = await axios.post(baseUrl + "/register", 
             {firstName, lastName, email, password},
-            { headers: { 'Content-Type': 'application/json' }}
+            { 
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            }
         )
         return res
     } catch (error) {
-        const err= error as AxiosError ;
-        if(err.response?.data){
-          alert(err.response.data);
+        const err= error as AxiosError<AuthResponse>;
+        if(err.response?.data?.message){
+          toast.error(err.response.data.message);
         } else {
           console.log(`Error: ${err.message}`);          
         }

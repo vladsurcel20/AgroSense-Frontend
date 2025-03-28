@@ -9,8 +9,8 @@
 
 }
 .formContainer{
-    width: 60%;
-    min-width: 300px;
+    width: 50%;
+    min-width: 350px;
     height: 100%;
     padding-left: 10%;
     padding-top: 10%;
@@ -18,7 +18,6 @@
 .form { 
     min-width: 350px; 
     width:50%;
-    /* height: 60%; */
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -32,7 +31,7 @@
 }
 
 .photoContainer{
-    width:40%;
+    width:50%;
     height:100%;
     max-width: none;
     overflow: hidden;
@@ -43,7 +42,7 @@
 
 .photo{
    width:auto;
-   height: 100%;
+   height:100%;
    object-fit: contain;
 }
 
@@ -92,4 +91,8 @@
 
 .actionText, .secondaryText {
     font-size: 0.9rem;
+}
+
+.clickableIcon{
+    cursor: pointer;
 }

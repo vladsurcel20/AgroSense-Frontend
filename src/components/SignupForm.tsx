@@ -1,24 +1,66 @@
-import React from 'react'
-import { OutlinedInput, FormControl, InputLabel, TextField, Checkbox } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, InputAdornment, TextField, Tooltip } from '@mui/material'
 import styles from '../pages/Auth.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 interface Props{
     handleHasAccount: () => void
+    setFirstName: React.Dispatch<React.SetStateAction<string>>
+    setLastName: React.Dispatch<React.SetStateAction<string>>
     setEmail: React.Dispatch<React.SetStateAction<string>>
     setPassword: React.Dispatch<React.SetStateAction<string>>
     setRetypedPassword: React.Dispatch<React.SetStateAction<string>>
     handleSubmitRegister: (e: React.FormEvent) => void
+    formatName: (n: string) => string
   }
 
-const SignupForm = ({handleHasAccount, setEmail, setPassword, setRetypedPassword, handleSubmitRegister}: Props) => {
+const SignupForm = ({handleHasAccount, setFirstName, setLastName, setEmail, setPassword, setRetypedPassword, handleSubmitRegister, formatName}: Props) => {
+
+const [showPassword, setShowPassword] = useState<boolean>(false)
+const [showRetypedPassword, setShowRetypedPassword] = useState(false);
+
+  
   return (
     <div className={styles.formContainer}>
         <h1>Create a new account</h1>
         <h2 className={styles.secondaryText}>Already have an account? <span className={styles.actionText} onClick={handleHasAccount}>Log in</span></h2>
 
-        <form className={styles.form} onSubmit={handleSubmitRegister}>
+        <form className={styles.form}>
+          <Box display='flex' flexDirection='row' justifyContent='space-between'>
             <TextField
-            id="outlined-email-input"
+            id="firstName-input"
+            type= "text"
+            label="Last Name"
+            autoComplete='family-name'
+            variant="outlined"
+            size='small'
+            sx={{
+              mb: "1rem",
+              width: { xs: '48%' }
+            }}
+            className={styles.textField}
+            onChange={(e) => setFirstName(() => formatName(e.target.value))}
+            />
+
+            <TextField
+            id="lastName-input"
+            type= "text"
+            label="First Name"
+            autoComplete='given-name'
+            variant="outlined"
+            size='small'
+            sx={{
+              mb: "1rem",
+              width: { xs: '48%'}
+            }}
+            className={styles.textField}
+            onChange={(e) => setLastName(() => formatName(e.target.value))}
+            />
+          </Box>
+          
+            <TextField
+            id="email-input"
             type= "email"
             label="Email"
             autoComplete='email'
@@ -31,9 +73,9 @@ const SignupForm = ({handleHasAccount, setEmail, setPassword, setRetypedPassword
             />
 
             <TextField
-            id="outlined-password-input"
+            id="password-input"
             label="Password"
-            type="password"
+            type = {!showPassword ? "password" : "text"}
             autoComplete="current-password"
             variant="outlined"
             size="small"
@@ -41,12 +83,26 @@ const SignupForm = ({handleHasAccount, setEmail, setPassword, setRetypedPassword
             sx={{mb: "1rem", color:"white" }}
             className={styles.textField}
             onChange={(e) => setPassword(e.target.value.trim())}
+            slotProps={{
+              input:{
+                endAdornment: (
+                  <InputAdornment position="end" onClick={() => setShowPassword(!showPassword)}>
+                    <Tooltip title={showPassword ? "Hide password" : "Show password"} placement='bottom'>
+                      <FontAwesomeIcon 
+                        icon={showPassword ? faEyeSlash : faEye} 
+                        className={styles.clickableIcon}
+                      />
+                    </Tooltip>
+                  </InputAdornment>
+                )
+              }
+            }}
             />
 
             <TextField
-            id="outlined-re-password-input"
-            label="Retype Password"
-            type="password"
+            id="re-password-input"
+            label="Retyped Password"
+            type = {!showRetypedPassword ? "password" : "text"}
             autoComplete="current-password"
             variant="outlined"
             size="small"
@@ -54,9 +110,23 @@ const SignupForm = ({handleHasAccount, setEmail, setPassword, setRetypedPassword
             sx={{mb: "1rem", color:"white" }}
             className={styles.textField}
             onChange={(e) => setRetypedPassword(e.target.value.trim())}
+            slotProps={{
+              input:{
+                endAdornment: (
+                  <InputAdornment position="end" onClick={() => setShowRetypedPassword(!showRetypedPassword)}>
+                    <Tooltip title={showRetypedPassword ? "Hide password" : "Show password"} placement='bottom'>
+                      <FontAwesomeIcon 
+                        icon={showRetypedPassword ? faEyeSlash : faEye} 
+                        className={styles.clickableIcon}
+                      />
+                    </Tooltip>
+                  </InputAdornment>
+                )
+              }
+            }}
             />
 
-            <button className={styles.submitButton} type='submit'>Create account</button>
+            <button className={styles.submitButton} type='submit' onClick={handleSubmitRegister}>Create account</button>
         </form>
     </div>
   )
