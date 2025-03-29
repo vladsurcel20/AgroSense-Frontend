@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { createContext, useState, ReactNode, useContext} from 'react'
 import { loginAPI, registerAPI } from '../services/AuthService';
 import { AxiosResponse } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 interface AuthContext{
@@ -16,6 +17,7 @@ export const AuthContext = createContext<AuthContext | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isLogged, setIsLogged] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     // const checkAuth = () => {
     //   setIsLogged(!!token); // Dacă există, utilizatorul este logat
@@ -31,6 +33,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           const response = await loginAPI(email, password);
         if (response) {
             setIsLogged(true);
+            navigate('/dashboard')
             return response;
         }
         } catch (error) {

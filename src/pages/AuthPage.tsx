@@ -4,6 +4,7 @@ import styles from './Auth.module.css'
 import SignupForm from '../components/SignupForm'
 import { useAuth } from '../contexts/AuthContext'
 import { toast } from "sonner"
+import { useLocation } from 'react-router-dom'
 
 const AuthPage = () => {
 
@@ -16,6 +17,9 @@ const AuthPage = () => {
 
   const {login, register} = useAuth()
 
+  const location = useLocation()
+  const section = location.state?.section || 'login'
+  
   const resetData = () => {
     setEmail('')
     setPassword('')
@@ -67,7 +71,7 @@ const AuthPage = () => {
 
   return (
     <div className={styles.authpage}>
-        {hasAccount ? 
+        {section === "login" ? 
           <LoginForm 
             handleHasAccount={handleHasAccount} 
             setEmail={setEmail} 

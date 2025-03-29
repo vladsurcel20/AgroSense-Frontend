@@ -1,13 +1,17 @@
 import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Leaf } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 const Navbar = () => {
+
+  const navigate = useNavigate()
+
   return (
     <div className="navbar">
-        <div className="logo">
+        <div className="logo-section">
             <div className="logo-wrapper">
-              <Leaf size="30" color="white" enableBackground={"var(--main-btn-color)"}/>
+              <Leaf size="28" color="white"/>
             </div>
             <h1>AgroSense</h1>
         </div>
@@ -19,8 +23,8 @@ const Navbar = () => {
         </ul>
         <div className="nav-buttons">
             <FontAwesomeIcon icon={faCircleHalfStroke} size="lg" className="theme-icon"/>
-            <button className="login-btn">Login</button>
-            <button className="signup-btn">Sign Up</button>
+            <button className="login-btn" onClick={() => navigate("/auth", { state: { section: "login" } })}>Login</button>
+            <button className="signup-btn" onClick={() => navigate("/auth", { state: { section: "signup" } })}>Sign Up</button>
         </div>
 
     </div>

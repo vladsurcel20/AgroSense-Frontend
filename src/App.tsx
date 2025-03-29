@@ -7,11 +7,12 @@ import Dashboard from './pages/Dashboard';
 const App = () => {
   return (
     <>
-      <Toaster position="top-left" richColors />
+      <Toaster position="top-right" richColors />
       <AuthProvider>
         <Routes>
           <Route path='/auth' element={<AuthPage />} />
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path="*" element={<AuthPage />} />
         </Routes>
       </AuthProvider>
     </>
