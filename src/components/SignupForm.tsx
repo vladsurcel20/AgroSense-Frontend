@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 interface Props{
-    handleHasAccount: () => void
+    handleSectionChange: () => void
     setFirstName: React.Dispatch<React.SetStateAction<string>>
     setLastName: React.Dispatch<React.SetStateAction<string>>
     setEmail: React.Dispatch<React.SetStateAction<string>>
@@ -15,7 +15,7 @@ interface Props{
     formatName: (n: string) => string
   }
 
-const SignupForm = ({handleHasAccount, setFirstName, setLastName, setEmail, setPassword, setRetypedPassword, handleSubmitRegister, formatName}: Props) => {
+const SignupForm = ({handleSectionChange, setFirstName, setLastName, setEmail, setPassword, setRetypedPassword, handleSubmitRegister, formatName}: Props) => {
 
 const [showPassword, setShowPassword] = useState<boolean>(false)
 const [showRetypedPassword, setShowRetypedPassword] = useState(false);
@@ -24,7 +24,7 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
   return (
     <div className={styles.formContainer}>
         <h1>Create a new account</h1>
-        <h2 className={styles.secondaryText}>Already have an account? <span className={styles.actionText} onClick={handleHasAccount}>Log in</span></h2>
+        <h2 className={styles.secondaryText}>Already have an account? <span className={styles.actionText} onClick={handleSectionChange}>Log in</span></h2>
 
         <form className={styles.form}>
           <Box display='flex' flexDirection='row' justifyContent='space-between'>

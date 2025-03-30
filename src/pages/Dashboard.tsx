@@ -4,6 +4,8 @@ import SensorCard from '../components/SensorCard'
 import ExpandedSensorCard from '../components/ExpandedSensorCard'
 import Modal from '@mui/material/Modal'
 import Sensor from '../Models/Sensor'
+import BreadcrumbNav from '../components/BreadcrumbNav'
+import LocationCard from '../components/LocationCard'
 
 const Dashboard = () => {
 
@@ -24,6 +26,8 @@ const Dashboard = () => {
           <h2>Greenhouse A</h2>
           <p className='secondary-text'>Last updated: 2 minutes ago 🟢</p>
         </div>
+
+        <BreadcrumbNav />
 
         <div className='tablist'>
           {tabs.map((tab) => (
@@ -47,6 +51,8 @@ const Dashboard = () => {
             <SensorCard setIsExpanded={setIsExpanded} type='light'/>
             <SensorCard setIsExpanded={setIsExpanded} type='light'/>
         </div>
+
+        <LocationCard></LocationCard>
       </div>
 
       <Modal open={isExpanded} onClose={() => setIsExpanded(false)}>

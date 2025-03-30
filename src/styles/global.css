@@ -19,7 +19,7 @@
   line-height: 1.5;
   font-weight: 500;
 
-  color-scheme: light dark;
+  color-scheme: light;
   color: rgba(255, 255, 255, 0.87);
 
   font-synthesis: none;
@@ -118,10 +118,21 @@ table {
 
 .card {
   width: 100%;
+  border: 0.5px solid;
   border-radius: 10px;
   padding: 15px 10px 15px 20px;
   color: var(--primary-text-color);
 }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+
+/* SENSOR-CARD-COMPONENT */
 
 .sensor-card {
   border: 0.5px solid;
@@ -134,7 +145,7 @@ table {
   margin-bottom: 2%;
 }
 
-.card-header .left{
+.sensor-card .left, .expanded-sensor-card .left{
   display: flex;
   align-items: center;
   gap: 0.5em;
@@ -352,9 +363,20 @@ table {
   align-items: center;
 }
 
+.navbar .nav-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  width: 20%;
+  height: 100%;
+  min-width: 250px;
+}
+
 .navbar .signup-btn {
   background-color: var(--main-btn-color);
   color: white;
+  /* height: 70%; */
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -370,6 +392,7 @@ table {
 .navbar .login-btn {
   background-color: transparent;
   color: var(--primary-text-color);
+  /* height: 70%; */
   padding: 10px 20px; 
   border: 1px solid var(--secondary-text-color);
   border-radius: 5px;
@@ -396,17 +419,28 @@ table {
   color: var(--hover-text-color);
 }
 
-.navbar .nav-buttons {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 20px;
-  width: 20%;
-  min-width: 250px;
-}
-
 .theme-icon {
   cursor: pointer;
 }
+
+
+/* BREADCRUMB NAV */
+
+.presentation-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.location-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigatiin-section .search-bar {
+  border-radius: 10px;
+}
+
 
 

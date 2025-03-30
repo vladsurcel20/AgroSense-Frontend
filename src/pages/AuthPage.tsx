@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom'
 
 const AuthPage = () => {
 
-  const [hasAccount, setHasAccount] = useState<boolean>(true)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [retypedPassword, setRetypedPassword] = useState<string>('')
@@ -18,7 +17,7 @@ const AuthPage = () => {
   const {login, register} = useAuth()
 
   const location = useLocation()
-  const section = location.state?.section || 'login'
+  const [section, setSection] = useState(location.state?.section || 'login')
   
   const resetData = () => {
     setEmail('')
@@ -28,8 +27,8 @@ const AuthPage = () => {
     setLastName('')
   }
 
-  const handleHasAccount = () => {
-    setHasAccount(!hasAccount)
+  const handleSectionChange = () => {
+    setSection((prevSection: string) => (prevSection === 'login' ? 'signup' : 'login'));
     resetData();
   }
 
@@ -54,7 +53,6 @@ const AuthPage = () => {
     const res = await register(firstName, lastName, email, password)
     if( res?.status === 201){
       console.log("User created")
-      setHasAccount(true)
     }
   }
 
@@ -73,14 +71,14 @@ const AuthPage = () => {
     <div className={styles.authpage}>
         {section === "login" ? 
           <LoginForm 
-            handleHasAccount={handleHasAccount} 
+            handleSectionChange={handleSectionChange} 
             setEmail={setEmail} 
             setPassword={setPassword}
             handleSubmitLogin={handleSubmitLogin}
           /> 
           : 
           <SignupForm 
-            handleHasAccount={handleHasAccount} 
+            handleSectionChange={handleSectionChange} 
             setFirstName={setFirstName}
             setLastName={setLastName}
             setEmail={setEmail} 

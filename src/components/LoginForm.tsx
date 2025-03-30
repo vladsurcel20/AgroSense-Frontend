@@ -5,13 +5,13 @@ import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import styles from '../pages/Auth.module.css'
 
 interface Props{
-  handleHasAccount: () => void
+  handleSectionChange: () => void
   setEmail: React.Dispatch<React.SetStateAction<string>>
   setPassword: React.Dispatch<React.SetStateAction<string>>
   handleSubmitLogin: (e: React.FormEvent) => void
 }
 
-const LoginForm = ({handleHasAccount, setEmail, setPassword, handleSubmitLogin}: Props) => {
+const LoginForm = ({handleSectionChange, setEmail, setPassword, handleSubmitLogin}: Props) => {
 
 const [showPassword, setShowPassword] = useState<boolean>(false)
 
@@ -74,7 +74,7 @@ const [showPassword, setShowPassword] = useState<boolean>(false)
         <button className={styles.submitButton} type='submit'>Log in</button>
 
         <div className={styles.center}>
-          <p className={styles.secondaryText}>Don't have an account?  <span className={styles.actionText} onClick={handleHasAccount}>Create an account</span></p>
+          <p className={styles.secondaryText}>Don't have an account?  <span className={styles.actionText} onClick={handleSectionChange}>Create an account</span></p>
         </div>
       </form>
     </div>
