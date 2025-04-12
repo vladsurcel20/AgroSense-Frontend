@@ -1,5 +1,5 @@
 import { Thermometer, Droplets, Sun, X} from 'lucide-react'
-import { LineChart, lineElementClasses } from '@mui/x-charts/LineChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 import React from 'react';
 
 

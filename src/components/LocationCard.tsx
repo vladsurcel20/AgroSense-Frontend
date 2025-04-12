@@ -1,12 +1,28 @@
 import { Leaf } from "lucide-react"
+import { useDashboard } from "../contexts/DashboardContext"
+import { useNavigate, useLocation } from 'react-router-dom'
+
+
 
 const LocationCard = () => {
+
+    const { setCurrentLocation } = useDashboard()
+    const navigate = useNavigate()
+    const location = useLocation()
+    
+    const pathname = location.pathname;
+
+    const selectLocation = () => {
+        setCurrentLocation("Palma de mallorca")
+        navigate(pathname + "/greenhouse")
+    }
+
   return (
     <div className="card location-card">
         <div className="card-header">
             <div className="left">
-                <h4>Location</h4>
-                <h5>Address</h5>
+                <h3>North Valley Farm</h3>
+                <h4 className="secondary-text">123 Valley Road, Springfield</h4>
             </div>
             <Leaf size={"24"} color="var(--main-btn-color)"/>
         </div>
@@ -22,7 +38,7 @@ const LocationCard = () => {
         </div>
 
         <div className="card-footer">
-            <button className="main-btn">Select location</button>
+            <button className="main-btn" onClick={selectLocation}>Select location</button>
         </div>
     </div>
   )

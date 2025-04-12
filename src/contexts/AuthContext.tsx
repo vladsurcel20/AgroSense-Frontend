@@ -54,6 +54,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       localStorage.removeItem('jwt');
       setIsLogged(false);
       localStorage.removeItem('user')
+      sessionStorage.removeItem("location");
+      sessionStorage.removeItem("greenhouse");
     };
   
   

@@ -1,14 +1,20 @@
 import { Breadcrumbs, InputAdornment, TextField } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { Leaf, Search, LocateFixed, MapPin, Slice } from "lucide-react"
+import { Search, MapPin } from "lucide-react"
 
 
 const BreadcrumbNav = () => {
     const location = useLocation();
     const pathnames = location.pathname.split("/").filter((x) => x);
 
+    const mapping: { [key: string]: string } = {
+        // 'dashboard': 'Dashboard',
+        'location': 'Locations',
+        'greenhouse': 'Greenhouses',
+      };
+
     const formatPathName = (text: string) => {
-        return text
+        return mapping[text] || text
             .replace(/-/g, " ")
             .replace(/\b\w/g, (char) => char.toUpperCase());
     };

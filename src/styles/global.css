@@ -72,14 +72,19 @@ table {
   border-spacing: 0;
 }
 
+a {
+  text-decoration: none;
+  color: var(--primary-text-color)
+}
+
 .page {
   width: 100vw;
   padding: 20px;
   color: var(--primary-text-color);
   overflow-x: hidden;
-  height: 90vh;
+  height: calc(100vh - 75px);
   position: relative;
-  top: 10vh;
+  top: 75px;
 }
 
 @media screen and (max-width: 768px) {
@@ -118,16 +123,39 @@ table {
 
 .card {
   width: 100%;
-  border: 0.5px solid;
+  border: 1px solid var(--secondary-text-color);
   border-radius: 10px;
-  padding: 15px 10px 15px 20px;
+  padding: 15px 10px 0 20px;
   color: var(--primary-text-color);
 }
 
-.card-header {
+.card .card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.location-card {
+  padding: 15px 0 0 0;
+}
+
+.location-card .card-header, .location-card .card-body {
+  padding: 0 10px 0 20px; 
+  margin-bottom: 20px;
+}
+
+.location-card .card-footer {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  border-top: 1px solid var(--secondary-text-color); 
+  margin-top: 25px;
+}
+
+.location-card .card-footer button {
+  width: 90%;
+  font-size: 1em;
+  border-radius: 8px;
 }
 
 
@@ -161,7 +189,7 @@ table {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid var(--secondary-text-color);
-  padding-top: 5px;
+  padding: 5px 0 8px 0;
   margin-top: 3%;
   color: var(--secondary-text-color);
   font-size: 0.875rem;
@@ -264,15 +292,31 @@ table {
 
 /* DASHBOARD PAGE */
 
+.dashboard-page {
+  overflow-y: auto;
+  margin: 0 auto;
+  width: 960px;
+}
+
+.location-cards-grid {
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  justify-content: center;
+  /* max-height: calc(160px * 2 + 30px); */
+}
+
 .sensor-cards-grid {
   width: 100%;
-  max-width: 1000px;;
+  max-width: 1260px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
   justify-content: center;
-  max-height: calc(160px * 2 + 30px);
-  overflow-y: auto;
+  /* max-height: calc(160px * 2 + 30px);
+  overflow-y: auto; */
 }
 
 .dashboard-header { 
@@ -324,24 +368,34 @@ table {
 @media screen and (max-width: 500px) {
   .sensor-cards-grid {
     grid-template-columns: repeat(1, minmax(200px, 300px));
-    /* justify-content: flex-start; */
   }
 }
 
 
 /* NAVBAR */
 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  color: var(--primary-text-color);
+  background-color: var(--primary-background-color);
+  border-bottom: 1px solid var(--secondary-text-color);
+  position: fixed;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  height: 10vh;
+  height: 75px;
   width: 100%;
-  color: var(--primary-text-color);
-  border-bottom: 1px solid var(--secondary-text-color);
-  position: fixed;
-  top: 0;
+  max-width: 1780px;
+  margin: 0 auto;
 }
 
 .navbar .logo-section {
@@ -376,7 +430,6 @@ table {
 .navbar .signup-btn {
   background-color: var(--main-btn-color);
   color: white;
-  /* height: 70%; */
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -392,7 +445,6 @@ table {
 .navbar .login-btn {
   background-color: transparent;
   color: var(--primary-text-color);
-  /* height: 70%; */
   padding: 10px 20px; 
   border: 1px solid var(--secondary-text-color);
   border-radius: 5px;
@@ -438,7 +490,7 @@ table {
   flex-direction: column;
 }
 
-.navigatiin-section .search-bar {
+.navigation-section .search-bar {
   border-radius: 10px;
 }
 
