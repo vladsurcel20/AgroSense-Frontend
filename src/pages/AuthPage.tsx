@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/auth/LoginForm'
 import styles from './Auth.module.css'
-import SignupForm from '../components/SignupForm'
+import SignupForm from '../components/auth/SignupForm'
 import { useAuth } from '../contexts/AuthContext'
 import { toast } from "sonner"
 import { useLocation } from 'react-router-dom'

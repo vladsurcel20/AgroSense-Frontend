@@ -494,5 +494,15 @@ header {
   border-radius: 10px;
 }
 
+.breadcrumb a{
+  /* font-size: 0.875em; */
+  color: var(--secondary-text-color);
+}
+
+.breadcrumb a:hover{
+  cursor: pointer;
+  color: var(--hover-text-color);
+}
+
 
 

@@ -1,5 +1,5 @@
-import Navbar from '../components/Navbar'
-import BreadcrumbNav from '../components/BreadcrumbNav'
+import Navbar from '../components/shared/Navbar'
+import BreadcrumbNav from '../components/dashboard/BreadcrumbNav'
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
 import { useEffect } from 'react';
 

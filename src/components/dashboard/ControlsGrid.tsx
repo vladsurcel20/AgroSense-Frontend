@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import Sensor from "../Models/Sensor";
+import Sensor from "../models/Sensor";
 import Modal from "@mui/material/Modal";
 import ExpandedSensorCard from "./ExpandedSensorCard";
 import SensorCard from "./SensorCard";

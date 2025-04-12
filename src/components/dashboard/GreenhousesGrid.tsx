@@ -2,7 +2,7 @@ import GreenhouseCard from './GreenhouseCard'
 
 const GreenhousesGrid = () => {
   return (
-    <div>
+    <div className="location-cards-grid">
         <GreenhouseCard />
         <GreenhouseCard />
         <GreenhouseCard />
