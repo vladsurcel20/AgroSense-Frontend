@@ -1,11 +1,29 @@
 import { Breadcrumbs, InputAdornment, TextField } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { Search, MapPin, House} from "lucide-react";
-import { useDashboard } from "../contexts/DashboardContext";
+import { useDashboard } from "../../contexts/DashboardContext";
+import { useEffect, useState } from "react";
+import { Location } from "../../types/location";
+import { Greenhouse } from "../../types/greenhouse";
 
 const BreadcrumbNav = () => {
   const location = useLocation();
-  const { currentLocation, currentGreenhouse } = useDashboard();
+  const { currentLocation, currentGreenhouse, locations, greenhouses, setLocations, setGreenhouses } = useDashboard();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [originalLocations, setOriginalLocations] = useState<Location[]>([]);
+  const [originalGreenhouses, setOriginalGreenhouses] = useState<Greenhouse[]>([]);
+
+  useEffect(() => {
+    if (locations.length > 0 && !originalLocations) {
+      setOriginalLocations(locations);
+    }
+  }, [locations]);
+  
+  useEffect(() => {
+    if (greenhouses.length > 0 && !originalGreenhouses) {
+      setOriginalGreenhouses(greenhouses);
+    }
+  }, [greenhouses]);
 
   const pathnames = location.pathname
     .split("/")
@@ -28,6 +46,11 @@ const BreadcrumbNav = () => {
   const icons: { [key: string]: JSX.Element } = {
     location: <MapPin size={28} color="var(--main-btn-color)" />,
     greenhouse: <House size={28} color="var(--main-btn-color)" />,
+  };
+
+  const placeholder: { [key: string]: string } = {
+    location: "Search locations..",
+    greenhouse: "Search greenhouses or crops..",
   };
 
   const formatPathName = (text: string) => {
@@ -77,6 +100,30 @@ const BreadcrumbNav = () => {
     return formatPathName(lastPath);
   };
 
+
+  useEffect(() => {
+    console.log("Search value changed:", searchValue);
+
+    if (lastPath === "location") {
+      if(searchValue.trim() === "") {
+        setLocations(originalLocations);
+      } else {
+      setLocations(originalLocations.filter((location) => location.name.toLowerCase().includes(searchValue.toLowerCase())));
+      }
+    } else if (lastPath === "greenhouse") {
+      if(searchValue.trim() === "") {
+        setGreenhouses(originalGreenhouses);
+      } else {
+      setGreenhouses(originalGreenhouses.filter((greenhouse) => greenhouse.name.toLowerCase().includes(searchValue.toLowerCase())));
+      }
+    }
+  }, [searchValue]);
+
+
+  useEffect(() => {
+    setSearchValue("");
+  }, [lastPath]);
+
   return (
     <div className="navigation-section" style={{ width: "100%" }}>
       <div className="presentation-section">
@@ -94,11 +141,13 @@ const BreadcrumbNav = () => {
         <TextField
           id="navigation-input"
           type="text"
-          placeholder="Search for sensors, controls, analytics"
+          placeholder={placeholder[lastPath]}
+          value={searchValue}
           autoFocus={false}
           variant="outlined"
           fullWidth
           className="search-bar"
+          onChange={(e) => setSearchValue(e.target.value.trim())}
           sx={{
             marginBottom: "20px",
             "& .MuiOutlinedInput-root": {

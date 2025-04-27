@@ -50,10 +50,7 @@ const AuthPage = () => {
       return
     } 
 
-    const res = await register(firstName, lastName, email, password)
-    if( res?.status === 201){
-      console.log("User created")
-    }
+    await register(firstName, lastName, email, password)
   }
 
   const formatName = (name: string) => {

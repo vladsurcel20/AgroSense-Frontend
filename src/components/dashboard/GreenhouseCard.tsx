@@ -1,7 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { useDashboard } from "../contexts/DashboardContext"
+import { useDashboard } from "../../contexts/DashboardContext"
+import { Greenhouse } from "../../types/greenhouse"
 
-const GreenhouseCard = () => {
+interface GreenhouseCardProps {
+    greenhouseData: Greenhouse
+}
+
+const GreenhouseCard = ({greenhouseData}: GreenhouseCardProps) => {
 
      const { setCurrentGreenhouse } = useDashboard()
     const navigate = useNavigate()
@@ -10,7 +15,8 @@ const GreenhouseCard = () => {
     const pathname = location.pathname;
 
      const selectGreenhouse = () => {
-        setCurrentGreenhouse("Rosiii")
+        setCurrentGreenhouse(greenhouseData)
+        sessionStorage.setItem("greenhouse", JSON.stringify(greenhouseData))
         navigate(pathname + "/sensors")
     }
 
@@ -19,8 +25,8 @@ const GreenhouseCard = () => {
     <div className="card location-card">
         <div className="card-header">
             <div className="left">
-                <h3>Greenhouse A</h3>
-                <h4 className="secondary-text">Tomatoess</h4>
+                <h3>{greenhouseData.name}</h3>
+                <h4 className="secondary-text">{greenhouseData.type}</h4>
             </div>
         </div>
         <div className="card-body">

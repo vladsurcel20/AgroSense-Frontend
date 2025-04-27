@@ -37,6 +37,7 @@
 
 
   --hover-text-color: #529269;
+  --secondary-hover-color: #ebd2ad;
   --main-btn-color: #347f4f;
   --secondary-btn-color: #f2f4f0;
 
@@ -474,6 +475,76 @@ header {
 .theme-icon {
   cursor: pointer;
 }
+
+
+.navbar .user-menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 5px 20px;
+  transition: 0.3s ease all;
+}
+
+.navbar .user-menu > :is(.user-avatar:hover, .user-info:hover) .user-menu {
+  background-color: var(--secondary-btn-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.navbar .user-menu .user-avatar {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  background-color: var(--main-btn-color);
+  color: var(--secondary-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar .user-menu .user-info p{
+  font-size: small;
+}
+
+.navbar .user-menu .user-info h3{
+  font-size: medium;
+}
+
+.navbar .user-menu .dropdown-menu {
+  display: none;  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: absolute;
+  top: 130%;
+  right: 0;
+  background-color: var(--secondary-btn-color);
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  overflow: hidden;
+  cursor: default;
+  z-index: 100;
+}
+
+.dropdown-item{
+  width: 100%;
+  padding: 5px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--secondary-btn-color);
+  cursor: pointer;
+  transition: 0.3s ease all;
+  font-size: 1em;
+}
+
+.dropdown-item:hover{
+  background-color: var(--secondary-hover-color);
+}
+
+
 
 
 /* BREADCRUMB NAV */

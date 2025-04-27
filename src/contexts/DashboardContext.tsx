@@ -1,30 +1,34 @@
 import React, { useContext, useState, createContext, ReactNode, useEffect} from "react";
+import { Location } from "../types/location";
+import { Greenhouse } from "../types/greenhouse";
 
 interface DashboardContext{
-    currentLocation: any,
-    currentGreenhouse: any
-    locations: any,
-    greenhouses: any,
-    setCurrentLocation: React.Dispatch<React.SetStateAction<any>>
-    setCurrentGreenhouse: React.Dispatch<React.SetStateAction<any>>
+    currentLocation: Location | null
+    currentGreenhouse: Greenhouse | null
+    locations: Location[]
+    greenhouses: Greenhouse[]
+    setLocations: React.Dispatch<React.SetStateAction<Location[]>>
+    setGreenhouses: React.Dispatch<React.SetStateAction<Greenhouse[]>>
+    setCurrentLocation: React.Dispatch<React.SetStateAction<Location>>
+    setCurrentGreenhouse: React.Dispatch<React.SetStateAction<Greenhouse>>
 }
 
 export const DashboardContext = createContext<DashboardContext | undefined>(undefined);
 
 
 export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [currentLocation, setCurrentLocation] = useState(() => {
+  const [currentLocation, setCurrentLocation] = useState<Location>(() => {
     const saved = sessionStorage.getItem("location");
     return saved ? JSON.parse(saved) : null;
   });
 
-  const [currentGreenhouse, setCurrentGreenhouse] = useState(() => {
+  const [currentGreenhouse, setCurrentGreenhouse] = useState<Greenhouse>(() => {
     const saved = sessionStorage.getItem("greenhouse");
     return saved ? JSON.parse(saved) : null;
   });
 
-  const [locations, setlocations] = useState<any[]>([])
-  const [greenhouses, setGreenhouses] = useState<any[]>([])
+  const [locations, setLocations] = useState<Location[]>([])
+  const [greenhouses, setGreenhouses] = useState<Greenhouse[]>([])
 
   useEffect(() => {
     if (currentLocation) {
@@ -41,7 +45,9 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
 
     
   return (
-    <DashboardContext.Provider value={{ currentLocation, currentGreenhouse, locations, greenhouses, setCurrentLocation, setCurrentGreenhouse }}>
+    <DashboardContext.Provider value={{ 
+      currentLocation, currentGreenhouse, locations, greenhouses, setCurrentLocation, setCurrentGreenhouse, setLocations, setGreenhouses,
+      }}>
         {children}
     </DashboardContext.Provider>
   )

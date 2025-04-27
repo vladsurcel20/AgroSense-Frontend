@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TextField, InputAdornment, Tooltip} from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
-import styles from '../pages/Auth.module.css'
+import styles from '../../pages/Auth.module.css'
 
 interface Props{
   handleSectionChange: () => void

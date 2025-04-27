@@ -3,9 +3,9 @@ import AuthPage from './pages/AuthPage'
 import { AuthProvider } from './contexts/AuthContext';
 import { Toaster } from 'sonner';
 import Dashboard from './pages/Dashboard';
-import LocationsGrid from './components/LocationsGrid';
-import GreenhousesGrid from './components/GreenhousesGrid';
-import ControlsGrid from './components/ControlsGrid';
+import LocationsGrid from './components/dashboard/LocationsGrid';
+import GreenhousesGrid from './components/dashboard/GreenhousesGrid';
+import ControlsGrid from './components/dashboard/ControlsGrid';
 import { DashboardProvider } from './contexts/DashboardContext';
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
               <Dashboard />
             </DashboardProvider>
           } >
-            <Route index element={<Navigate to="location" replace />} />
+            {/* <Route index element={<Navigate to="location" />} /> */}
             <Route path="location" element={<LocationsGrid />} />
             <Route path="location/greenhouse" element={<GreenhousesGrid />} />
             <Route path="location/greenhouse/sensors" element={<ControlsGrid />} />

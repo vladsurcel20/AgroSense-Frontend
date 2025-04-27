@@ -1,10 +1,15 @@
 import { Leaf } from "lucide-react"
-import { useDashboard } from "../contexts/DashboardContext"
+import { useDashboard } from "../../contexts/DashboardContext"
 import { useNavigate, useLocation } from 'react-router-dom'
+import { formatDistanceToNow } from 'date-fns'
+import axios, { AxiosError } from "axios"
+import { Location } from "../../types/location"
 
+interface LocationCardProps {
+    locationData: Location
+}
 
-
-const LocationCard = () => {
+const LocationCard = ({locationData}: LocationCardProps) => {
 
     const { setCurrentLocation } = useDashboard()
     const navigate = useNavigate()
@@ -12,8 +17,24 @@ const LocationCard = () => {
     
     const pathname = location.pathname;
 
+    const baseURL = "http://localhost:5000/api/locations/"
+
+    const updateLocationDate = async () => {
+        try {
+            const res  = await axios.put(baseURL + locationData.id, {}, {
+                withCredentials: true,
+            })
+            locationData = res.data
+        } catch (error: AxiosError | any) {
+            console.error(error.response.data.message)      
+        }
+    }
+
     const selectLocation = () => {
-        setCurrentLocation("Palma de mallorca")
+        updateLocationDate()
+        setCurrentLocation(locationData)
+        sessionStorage.setItem("location", JSON.stringify(locationData))
+        sessionStorage.removeItem("greenhouse")
         navigate(pathname + "/greenhouse")
     }
 
@@ -21,19 +42,19 @@ const LocationCard = () => {
     <div className="card location-card">
         <div className="card-header">
             <div className="left">
-                <h3>North Valley Farm</h3>
-                <h4 className="secondary-text">123 Valley Road, Springfield</h4>
+                <h3>{locationData.name}</h3>
+                <h4 className="secondary-text">{locationData.address}, {locationData.city}</h4>
             </div>
             <Leaf size={"24"} color="var(--main-btn-color)"/>
         </div>
         <div className="card-body">
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
                 <p>Greenhouses:</p>
-                <p>3</p>
+                <p>{locationData.greenhouseCount}</p>
             </div>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
                 <p>Last visited:</p>
-                <p>2 days ago</p>
+                <p>{formatDistanceToNow(new Date(locationData.lastVisited), { addSuffix: true }).replace('about ', '')}</p>
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, InputAdornment, TextField, Tooltip } from '@mui/material'
-import styles from '../pages/Auth.module.css'
+import styles from '../../pages/Auth.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
