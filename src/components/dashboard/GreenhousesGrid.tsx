@@ -7,7 +7,7 @@ const GreenhousesGrid = () => {
 
   const baseUrl = "http://localhost:5000/api/greenhouses?locationId="
 
-  const {greenhouses, setGreenhouses, currentLocation} = useDashboard()
+  const {searchedGreenhouses, setGreenhouses, currentLocation} = useDashboard()
 
   useEffect(() => {
     const fetchGreenhouses = async () => {
@@ -29,7 +29,7 @@ const GreenhousesGrid = () => {
   return (
     <div className="location-cards-grid">
         {
-          greenhouses?.map((greenhouse) => (
+          searchedGreenhouses?.map((greenhouse) => (
             <GreenhouseCard key={greenhouse.id} greenhouseData={greenhouse} />
           ))
         }

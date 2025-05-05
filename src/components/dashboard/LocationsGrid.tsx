@@ -7,7 +7,7 @@ const LocationsGrid = () => {
 
   const baseUrl = "http://localhost:5000/api/locations?count=true"
 
-  const {locations, setLocations} = useDashboard()
+  const {searchedLocations, setLocations} = useDashboard()
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -27,7 +27,7 @@ const LocationsGrid = () => {
 
   return (
     <div className='location-cards-grid'>
-      {locations?.map((location) => (
+      {searchedLocations?.map((location) => (
         <LocationCard key={location.id} locationData={location} />
       ))}
     </div> 

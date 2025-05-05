@@ -1,27 +1,30 @@
 import { Breadcrumbs, InputAdornment, TextField } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { Search, MapPin, House} from "lucide-react";
+import { Search, MapPin, House } from "lucide-react";
 import { useDashboard } from "../../contexts/DashboardContext";
 import { useEffect, useState } from "react";
-import { Location } from "../../types/location";
-import { Greenhouse } from "../../types/greenhouse";
 
 const BreadcrumbNav = () => {
   const location = useLocation();
-  const { currentLocation, currentGreenhouse, locations, greenhouses, setLocations, setGreenhouses } = useDashboard();
+  const {
+    currentLocation,
+    currentGreenhouse,
+    locations,
+    greenhouses,
+    setSearchedLocations,
+    setSearchedGreenhouses,
+  } = useDashboard();
   const [searchValue, setSearchValue] = useState<string>("");
-  const [originalLocations, setOriginalLocations] = useState<Location[]>([]);
-  const [originalGreenhouses, setOriginalGreenhouses] = useState<Greenhouse[]>([]);
 
   useEffect(() => {
-    if (locations.length > 0 && !originalLocations) {
-      setOriginalLocations(locations);
+    if (locations.length > 0) {
+      setSearchedLocations(locations);
     }
   }, [locations]);
-  
+
   useEffect(() => {
-    if (greenhouses.length > 0 && !originalGreenhouses) {
-      setOriginalGreenhouses(greenhouses);
+    if (greenhouses.length > 0) {
+      setSearchedGreenhouses(greenhouses);
     }
   }, [greenhouses]);
 
@@ -54,7 +57,10 @@ const BreadcrumbNav = () => {
   };
 
   const formatPathName = (text: string) => {
-    return mapping[text] || text.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+    return (
+      mapping[text] ||
+      text.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
+    );
   };
 
   const renderBreadcrumbs = () => {
@@ -78,9 +84,7 @@ const BreadcrumbNav = () => {
     }
 
     if (lastPath === "sensors" && currentGreenhouse) {
-      items.push(
-        <span key="gh-name">{currentGreenhouse.name}</span>
-      );
+      items.push(<span key="gh-name">{currentGreenhouse.name}</span>);
     }
 
     return <Breadcrumbs className="breadcrumb">{items}</Breadcrumbs>;
@@ -100,25 +104,27 @@ const BreadcrumbNav = () => {
     return formatPathName(lastPath);
   };
 
-
   useEffect(() => {
-    console.log("Search value changed:", searchValue);
-
-    if (lastPath === "location") {
-      if(searchValue.trim() === "") {
-        setLocations(originalLocations);
+    if (lastPath === "location" && locations.length > 0) {
+      if (searchValue.trim() === "") {
+        setSearchedLocations([...locations]);
       } else {
-      setLocations(originalLocations.filter((location) => location.name.toLowerCase().includes(searchValue.toLowerCase())));
+        const filteredLocations = locations.filter((loc) =>
+          loc.name.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        setSearchedLocations(filteredLocations);
       }
-    } else if (lastPath === "greenhouse") {
-      if(searchValue.trim() === "") {
-        setGreenhouses(originalGreenhouses);
+    } else if (lastPath === "greenhouse" && greenhouses.length > 0) {
+      if (searchValue.trim() === "") {
+        setSearchedGreenhouses([...greenhouses]);
       } else {
-      setGreenhouses(originalGreenhouses.filter((greenhouse) => greenhouse.name.toLowerCase().includes(searchValue.toLowerCase())));
+        const filteredGreenhouses = greenhouses.filter((gh) =>
+          gh.name.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        setSearchedGreenhouses(filteredGreenhouses);
       }
     }
-  }, [searchValue]);
-
+  }, [searchValue, lastPath]);
 
   useEffect(() => {
     setSearchValue("");
@@ -133,7 +139,9 @@ const BreadcrumbNav = () => {
           {lastPath !== "location" && renderBreadcrumbs()}
 
           <h2>{renderTitle()}</h2>
-          <p className="secondary-text">{lastPath !== "sensors" && description[lastPath]}</p>
+          <p className="secondary-text">
+            {lastPath !== "sensors" && description[lastPath]}
+          </p>
         </div>
       </div>
 
@@ -147,7 +155,7 @@ const BreadcrumbNav = () => {
           variant="outlined"
           fullWidth
           className="search-bar"
-          onChange={(e) => setSearchValue(e.target.value.trim())}
+          onChange={(e) => setSearchValue(e.target.value)}
           sx={{
             marginBottom: "20px",
             "& .MuiOutlinedInput-root": {

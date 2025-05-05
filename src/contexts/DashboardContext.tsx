@@ -7,8 +7,12 @@ interface DashboardContext{
     currentGreenhouse: Greenhouse | null
     locations: Location[]
     greenhouses: Greenhouse[]
+    searchedLocations: Location[]
+    searchedGreenhouses: Greenhouse[]
     setLocations: React.Dispatch<React.SetStateAction<Location[]>>
     setGreenhouses: React.Dispatch<React.SetStateAction<Greenhouse[]>>
+    setSearchedLocations: React.Dispatch<React.SetStateAction<Location[]>>
+    setSearchedGreenhouses: React.Dispatch<React.SetStateAction<Greenhouse[]>>
     setCurrentLocation: React.Dispatch<React.SetStateAction<Location>>
     setCurrentGreenhouse: React.Dispatch<React.SetStateAction<Greenhouse>>
 }
@@ -29,6 +33,8 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
 
   const [locations, setLocations] = useState<Location[]>([])
   const [greenhouses, setGreenhouses] = useState<Greenhouse[]>([])
+  const [searchedLocations, setSearchedLocations] = useState<Location[]>([])
+  const [searchedGreenhouses, setSearchedGreenhouses] = useState<Greenhouse[]>([])
 
   useEffect(() => {
     if (currentLocation) {
@@ -46,7 +52,11 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
     
   return (
     <DashboardContext.Provider value={{ 
-      currentLocation, currentGreenhouse, locations, greenhouses, setCurrentLocation, setCurrentGreenhouse, setLocations, setGreenhouses,
+      currentLocation, currentGreenhouse, locations, greenhouses, searchedLocations,
+      searchedGreenhouses,
+      setCurrentLocation, setCurrentGreenhouse, setLocations, setGreenhouses,
+      setSearchedLocations,
+      setSearchedGreenhouses
       }}>
         {children}
     </DashboardContext.Provider>
