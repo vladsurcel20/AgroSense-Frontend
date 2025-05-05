@@ -41,8 +41,8 @@ const Navbar = () => {
               <h1>AgroSense</h1>
           </div>
           <ul className="nav-links">
-              <li>Home</li>
-              <li onClick={() => navigate("dashboard/location")}>Dashboard</li>
+              <li onClick={() => navigate("/home")}>Home</li>
+              <li onClick={() => navigate("/dashboard/location")}>Dashboard</li>
               <li>Settings</li>
               <li>About</li>
           </ul>

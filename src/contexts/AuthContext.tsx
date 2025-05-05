@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         sessionStorage.setItem("user", JSON.stringify(response!.data));
       } catch (error) {
         handleInvalidSession();
-        navigate('/auth');
+        navigate('/home');
       } 
     };
 
@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
               setIsLogged(true);
               setUser(response.data.user);
               sessionStorage.setItem("user", JSON.stringify(response.data.user))
-              navigate('/dashboard/location')
+              navigate('/home')
               return response;
           }
         } catch (error) {
@@ -73,7 +73,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         await logoutAPI(); 
       } finally {
         handleInvalidSession();
-        navigate('/auth');
+        navigate('/home');
       }
     };
 

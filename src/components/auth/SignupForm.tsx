@@ -36,8 +36,26 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             variant="outlined"
             size='small'
             sx={{
+              "& .MuiOutlinedInput-root": {
+                height: "2.5em",
+                "& fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&:hover fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "var(--main-btn-color)",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "var(--main-btn-color)",
+              },
               mb: "1rem",
-              width: { xs: '48%' }
+              width: { xs: '48%' },
             }}
             className={styles.textField}
             onChange={(e) => setFirstName(() => formatName(e.target.value))}
@@ -51,8 +69,26 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             variant="outlined"
             size='small'
             sx={{
+              "& .MuiOutlinedInput-root": {
+                height: "2.5em",
+                "& fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&:hover fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "var(--main-btn-color)",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "var(--main-btn-color)",
+              },
               mb: "1rem",
-              width: { xs: '48%'}
+              width: { xs: '48%' },
             }}
             className={styles.textField}
             onChange={(e) => setLastName(() => formatName(e.target.value))}
@@ -67,7 +103,27 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             variant="outlined"
             fullWidth
             size='small'
-            sx={{mb: "1rem" }}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                height: "2.5em",
+                "& fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&:hover fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "var(--main-btn-color)",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "var(--main-btn-color)",
+              },
+              mb: "1rem",
+            }}
             className={styles.textField}
             onChange={(e) => setEmail(e.target.value.trim())}
             />
@@ -80,7 +136,27 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             variant="outlined"
             size="small"
             fullWidth
-            sx={{mb: "1rem", color:"white" }}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                height: "2.5em",
+                "& fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&:hover fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "var(--main-btn-color)",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "var(--main-btn-color)",
+              },
+              mb: "1rem",
+            }}
             className={styles.textField}
             onChange={(e) => setPassword(e.target.value.trim())}
             slotProps={{
@@ -107,7 +183,27 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             variant="outlined"
             size="small"
             fullWidth
-            sx={{mb: "1rem", color:"white" }}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                height: "2.5em",
+                "& fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&:hover fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "var(--main-btn-color)",
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "var(--main-btn-color)",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "var(--main-btn-color)",
+              },
+              mb: "1rem",
+            }}
             className={styles.textField}
             onChange={(e) => setRetypedPassword(e.target.value.trim())}
             slotProps={{

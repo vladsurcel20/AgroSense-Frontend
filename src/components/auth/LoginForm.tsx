@@ -18,7 +18,7 @@ const [showPassword, setShowPassword] = useState<boolean>(false)
 
   return (
     <div className={styles.formContainer}>
-      <h1>Log in to your Account</h1>
+      <h1>Log in to your account</h1>
       <h2 className={styles.secondaryText}>Welcome back!</h2>
 
       <form className={styles.form} onSubmit={handleSubmitLogin}>
@@ -30,7 +30,27 @@ const [showPassword, setShowPassword] = useState<boolean>(false)
           variant="outlined"
           fullWidth
           size='small'
-          sx={{mb: "1rem" }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              height: "2.5em",
+              "& fieldset": {
+                borderColor: "var(--main-btn-color)",
+              },
+              "&:hover fieldset": {
+                borderColor: "var(--main-btn-color)",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "var(--main-btn-color)",
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "var(--main-btn-color)",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "var(--main-btn-color)",
+            },
+            mb: "1rem",
+          }}
           className={styles.textField}
           onChange={(e) => setEmail(e.target.value.trim())}
         />
@@ -43,7 +63,29 @@ const [showPassword, setShowPassword] = useState<boolean>(false)
           variant="outlined"
           size="small"
           fullWidth
-          sx={{mb: "1rem", color:"white" }}
+          sx={{
+            marginBottom: "20px",
+            "& .MuiOutlinedInput-root": {
+              height: "2.5em",
+              "& fieldset": {
+                borderColor: "var(--main-btn-color)",
+              },
+              "&:hover fieldset": {
+                borderColor: "var(--main-btn-color)",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "var(--main-btn-color)",
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "var(--main-btn-color)",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "var(--main-btn-color)",
+            },
+            mb: "1rem", 
+            color:"white",
+          }}
           className={styles.textField}
           onChange={(e) => setPassword(e.target.value.trim())}
           slotProps={{

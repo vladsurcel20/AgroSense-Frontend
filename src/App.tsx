@@ -7,6 +7,7 @@ import LocationsGrid from './components/dashboard/LocationsGrid';
 import GreenhousesGrid from './components/dashboard/GreenhousesGrid';
 import ControlsGrid from './components/dashboard/ControlsGrid';
 import { DashboardProvider } from './contexts/DashboardContext';
+import LandingPage from './pages/LandingPage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <AuthProvider>
         <Routes>
           <Route path='/auth' element={<AuthPage />} />
+          <Route path='/home' element={<LandingPage />}/>
           <Route path='/dashboard' element={
             <DashboardProvider>
               <Dashboard />

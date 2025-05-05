@@ -49,6 +49,11 @@
   --light-color: #f59e0b;
   --light-color-light: #fffbeb;
 
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
   --card-xs: 150px;
   --card-sm: 200px;
   --card-md: 300px;
@@ -485,11 +490,6 @@ header {
   gap: 20px;
   padding: 5px 20px;
   transition: 0.3s ease all;
-}
-
-.navbar .user-menu > :is(.user-avatar:hover, .user-info:hover) .user-menu {
-  background-color: var(--secondary-btn-color);
-  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -513,9 +513,10 @@ header {
 }
 
 .navbar .user-menu .dropdown-menu {
-  display: none;  display: flex;
+  display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 10px;
   position: absolute;
   top: 130%;
   right: 0;
@@ -524,6 +525,7 @@ header {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 10px;
+  padding-bottom: 15px;
   overflow: hidden;
   cursor: default;
   z-index: 100;
@@ -531,7 +533,7 @@ header {
 
 .dropdown-item{
   width: 100%;
-  padding: 5px 0;
+  padding: 7px 5px;
   border: none;
   border-radius: 5px;
   background-color: var(--secondary-btn-color);
@@ -573,6 +575,510 @@ header {
 .breadcrumb a:hover{
   cursor: pointer;
   color: var(--hover-text-color);
+}
+
+
+
+
+
+
+
+/* ------------------LANDING PAGE ---------------------------- */
+
+
+.agro-landing-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color)
+}
+
+.agro-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.agro-icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+}
+
+.agro-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Hero Section */
+.agro-hero-section {
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.agro-hero-grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.agro-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.agro-hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.agro-hero-description {
+  font-size: 1.125rem;
+  color: var(--secondary-text-color);
+}
+
+.agro-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.agro-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.agro-button-primary {
+  background-color: var(--main-btn-color);
+  color: white;
+  border: 1px solid transparent;
+}
+
+.agro-button-primary:hover {
+  background-color: var(--hover-text-color);
+}
+
+.agro-button-outline {
+  background-color: var(--secondary-btn-color);
+  color: var(--primary-text-color);
+  border: 1px solid var(--secondary-text-color);
+}
+
+.agro-button-outline:hover {
+  background-color: var(--secondary-hover-color);
+}
+
+.agro-button .agro-icon {
+  margin-left: 0.5rem;
+}
+
+.agro-hero-image-container {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.agro-hero-image {
+  aspect-ratio: 4/3;
+  background: linear-gradient(to bottom right, var(--humidity-color-light), rgba(52, 127, 79, 0.3), var(--light-color-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agro-dashboard-preview {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  background-color: var(--primary-background-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--secondary-text-color);
+  backdrop-filter: blur(8px);
+}
+
+.agro-dashboard-titlebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5rem;
+  background-color: var(--input-background-color);
+  border-bottom: 1px solid var(--secondary-text-color);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.agro-titlebar-dot {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.agro-titlebar-dot-red {
+  background-color: var(--temperature-color);
+}
+
+.agro-titlebar-dot-yellow {
+  background-color: var(--light-color);
+}
+
+.agro-titlebar-dot-green {
+  background-color: var(--main-btn-color);
+}
+
+.agro-titlebar-title {
+  font-size: 0.75rem;
+  color: var(--secondary-text-color);
+  margin-left: 0.5rem;
+}
+
+.agro-dashboard-grid {
+  padding-top: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.agro-dashboard-card {
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  border: 1px solid;
+}
+
+.agro-dashboard-card-temperature {
+  background-color: var(--temperature-color-light);
+  border-color: var(--temperature-color-border);
+}
+
+.agro-dashboard-card-humidity {
+  background-color: var(--humidity-color-light);
+  border-color: var(--humidity-color);
+}
+
+.agro-dashboard-card-light {
+  background-color: var(--light-color-light);
+  border-color: var(--light-color);
+}
+
+.agro-dashboard-card-co2 {
+  background-color: var(--input-background-color);
+  border-color: var(--secondary-text-color);
+}
+
+.agro-dashboard-card-label {
+  font-size: 0.75rem;
+  color: var(--secondary-text-color);
+}
+
+.agro-dashboard-card-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+/* Features Section */
+.agro-features-section {
+  padding: 4rem 0;
+  background-color: var(--card-section-background);
+}
+
+.agro-features-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.agro-section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.agro-section-description {
+  font-size: 1.125rem;
+  color: var(--secondary-text-color);
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.agro-features-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.agro-feature-card {
+  background-color: var(--primary-background-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--secondary-text-color);
+}
+
+.agro-feature-icon {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.agro-feature-icon .agro-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.agro-feature-icon-primary {
+  background-color: var(--temperature-color-light);
+}
+
+.agro-feature-icon-primary .agro-icon {
+  color: var(--main-btn-color);
+}
+
+.agro-feature-icon-secondary {
+  background-color: var(--secondary-btn-color);
+}
+
+.agro-feature-icon-secondary .agro-icon {
+  color: var(--main-btn-color);
+}
+
+.agro-feature-icon-accent {
+  background-color: var(--light-color-light);
+}
+
+.agro-feature-icon-accent .agro-icon {
+  color: var(--light-color);
+}
+
+.agro-feature-icon-muted {
+  background-color: var(--input-background-color);
+}
+
+.agro-feature-icon-muted .agro-icon {
+  color: var(--secondary-text-color);
+}
+
+.agro-feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.agro-feature-description {
+  color: var(--text-muted);
+}
+
+/* CTA Section */
+.agro-cta-section {
+  padding: 4rem 0;
+}
+
+.agro-cta-card {
+  background-color: #347f4f1A;
+  border: 1px solid var(--primary-border);
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+.agro-cta-content {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.agro-cta-content .agro-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.agro-cta-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.agro-cta-description {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+}
+
+/* Footer */
+.agro-footer {
+  background-color: var(--card-section-background);
+  padding: 3rem 0;
+  margin-top: auto;
+}
+
+.agro-footer-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.agro-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.agro-logo-icon {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.375rem;
+  background-color: var(--main-btn-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .agro-logo-icon svg {
+  color: white;
+  height: 1.25rem;
+  width: 1.25rem;
+} */
+
+.agro-logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.agro-footer-description {
+  color: var(--text-muted);
+}
+
+.agro-footer-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.agro-footer-list {
+  list-style: none;
+}
+
+.agro-footer-list li {
+  margin-bottom: 0.5rem;
+}
+
+.agro-footer-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.agro-footer-link:hover {
+  color: var(--primary-color);
+}
+
+.agro-footer-bottom {
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.agro-copyright {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.agro-social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.agro-social-link {
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.agro-social-link:hover {
+  color: var(--primary-color);
+}
+
+.agro-social-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .agro-hero-section {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+  }
+
+  .agro-hero-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agro-hero-title {
+    font-size: 3rem;
+  }
+
+  .agro-button-group {
+    flex-direction: row;
+  }
+
+  .agro-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agro-footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .agro-footer-bottom {
+    flex-direction: row;
+  }
+
+  .agro-social-links {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .agro-hero-title {
+    font-size: 3.75rem;
+  }
+
+  .agro-features-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 
