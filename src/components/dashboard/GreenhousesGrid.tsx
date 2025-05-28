@@ -5,14 +5,14 @@ import axios, { AxiosError } from 'axios'
 
 const GreenhousesGrid = () => {
 
-  const baseUrl = "http://localhost:5000/api/greenhouses?locationId="
+  const baseUrl = `${import.meta.env.VITE_BASE_URL}/greenhouses?count=true`
 
   const {searchedGreenhouses, setGreenhouses, currentLocation} = useDashboard()
 
   useEffect(() => {
     const fetchGreenhouses = async () => {
       try{
-        const res = await axios.get(baseUrl + currentLocation?.id, {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/greenhouses?locationId=${currentLocation?.id}&count=true`, {
           withCredentials: true,
         })
         const data = res.data

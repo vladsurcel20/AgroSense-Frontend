@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDashboard } from "../../contexts/DashboardContext"
 import { Greenhouse } from "../../types/greenhouse"
+import axios, { AxiosError } from "axios"
+import { formatDistanceToNow } from "date-fns"
 
 interface GreenhouseCardProps {
     greenhouseData: Greenhouse
@@ -8,13 +10,30 @@ interface GreenhouseCardProps {
 
 const GreenhouseCard = ({greenhouseData}: GreenhouseCardProps) => {
 
-     const { setCurrentGreenhouse } = useDashboard()
+    const { setCurrentGreenhouse } = useDashboard()
     const navigate = useNavigate()
     const location = useLocation()
     
     const pathname = location.pathname;
+    const baseURL = "http://localhost:5000/api/greenhouses/"
 
-     const selectGreenhouse = () => {
+    const cultureName = greenhouseData.culture?.name
+        ? greenhouseData.culture.name.charAt(0).toUpperCase() + greenhouseData.culture.name.slice(1)
+        : "";
+
+    const updateGreenhouseDate = async () => {
+        try {
+            const res  = await axios.patch(baseURL + greenhouseData.id, {}, {
+                withCredentials: true,
+            })
+            greenhouseData = res.data
+        } catch (error: AxiosError | any) {
+            console.error(error.response.data.message)      
+        }
+    }
+
+    const selectGreenhouse = async () => {
+        await updateGreenhouseDate();
         setCurrentGreenhouse(greenhouseData)
         sessionStorage.setItem("greenhouse", JSON.stringify(greenhouseData))
         navigate(pathname + "/sensors")
@@ -23,24 +42,30 @@ const GreenhouseCard = ({greenhouseData}: GreenhouseCardProps) => {
 
   return (
     <div className="card location-card">
-        <div className="card-header">
+        <div className="card-header gh-card-header">
             <div className="left">
                 <h3>{greenhouseData.name}</h3>
-                <h4 className="secondary-text">{greenhouseData.type}</h4>
+                {cultureName ?
+                <div className="culture-name">{cultureName}</div> : <></>
+                }
             </div>
         </div>
         <div className="card-body">
         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-                <p>Size:</p>
-                <p>500 mp2</p>
+                <p>Last Visited:</p>
+                <p>{greenhouseData.lastVisited != null ?
+                    formatDistanceToNow(new Date(greenhouseData.lastVisited), { addSuffix: true }).replace('about ', '')
+                    : "never"
+                    }
+                </p>
             </div>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
                 <p>Sensors:</p>
-                <p>7</p>
+                <p>{greenhouseData.sensorCount}</p>
             </div>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
                 <p>Controls:</p>
-                <p>3</p>
+                <p>{greenhouseData.deviceCount}</p>
             </div>
         </div>
 

@@ -5,14 +5,14 @@ import { Toaster } from 'sonner';
 import Dashboard from './pages/Dashboard';
 import LocationsGrid from './components/dashboard/LocationsGrid';
 import GreenhousesGrid from './components/dashboard/GreenhousesGrid';
-import ControlsGrid from './components/dashboard/ControlsGrid';
+import ControlsGrid from './components/dashboard/ControlsSection';
 import { DashboardProvider } from './contexts/DashboardContext';
 import LandingPage from './pages/LandingPage';
 
 const App = () => {
   return (
     <>
-      <Toaster position="top-right" richColors />
+      <Toaster position="top-right" richColors closeButton={true}/>
       <AuthProvider>
         <Routes>
           <Route path='/auth' element={<AuthPage />} />
@@ -28,7 +28,7 @@ const App = () => {
             <Route path="location/greenhouse/sensors" element={<ControlsGrid />} />
             <Route path="*" element={<Navigate to="/dashboard/location" replace />} />
           </Route>
-          <Route path="*" element={<AuthPage />} />
+          <Route path="*" element={<LandingPage />} />
         </Routes>
       </AuthProvider>
     </>

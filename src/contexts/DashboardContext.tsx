@@ -1,6 +1,7 @@
 import React, { useContext, useState, createContext, ReactNode, useEffect} from "react";
 import { Location } from "../types/location";
 import { Greenhouse } from "../types/greenhouse";
+import { EspSensorReadings } from "../types/espSensorReading";
 
 interface DashboardContext{
     currentLocation: Location | null
@@ -9,12 +10,14 @@ interface DashboardContext{
     greenhouses: Greenhouse[]
     searchedLocations: Location[]
     searchedGreenhouses: Greenhouse[]
+    currentSensorReading: EspSensorReadings
     setLocations: React.Dispatch<React.SetStateAction<Location[]>>
     setGreenhouses: React.Dispatch<React.SetStateAction<Greenhouse[]>>
     setSearchedLocations: React.Dispatch<React.SetStateAction<Location[]>>
     setSearchedGreenhouses: React.Dispatch<React.SetStateAction<Greenhouse[]>>
     setCurrentLocation: React.Dispatch<React.SetStateAction<Location>>
     setCurrentGreenhouse: React.Dispatch<React.SetStateAction<Greenhouse>>
+    setCurrentSensorReading: React.Dispatch<React.SetStateAction<EspSensorReadings>>
 }
 
 export const DashboardContext = createContext<DashboardContext | undefined>(undefined);
@@ -35,6 +38,7 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
   const [greenhouses, setGreenhouses] = useState<Greenhouse[]>([])
   const [searchedLocations, setSearchedLocations] = useState<Location[]>([])
   const [searchedGreenhouses, setSearchedGreenhouses] = useState<Greenhouse[]>([])
+  const [currentSensorReading, setCurrentSensorReading] = useState<EspSensorReadings>({} as EspSensorReadings)
 
   useEffect(() => {
     if (currentLocation) {
@@ -53,10 +57,10 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
   return (
     <DashboardContext.Provider value={{ 
       currentLocation, currentGreenhouse, locations, greenhouses, searchedLocations,
-      searchedGreenhouses,
+      searchedGreenhouses, currentSensorReading,
       setCurrentLocation, setCurrentGreenhouse, setLocations, setGreenhouses,
       setSearchedLocations,
-      setSearchedGreenhouses
+      setSearchedGreenhouses, setCurrentSensorReading
       }}>
         {children}
     </DashboardContext.Provider>

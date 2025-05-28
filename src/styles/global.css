@@ -46,8 +46,15 @@
   --temperature-color-border: #fddede;
   --humidity-color: #3b84ff;
   --humidity-color-light: #eff6ff;
+  --humidity-color-control: #ecfeff;
+  --humidity-color-control-border: #a5f3fc;
   --light-color: #f59e0b;
   --light-color-light: #fffbeb;
+  --light-color-control: #fffbeb;
+  --light-color-control-border: #f59e0b;
+
+  --on-color: #4caf50;
+  --off-color: #d3d3d3;
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -164,6 +171,15 @@ a {
   border-radius: 8px;
 }
 
+.gh-card-header .culture-name {
+  border: 1px solid var(--hover-text-color);
+  font-size: 12px;
+  padding: 2px 0;
+  text-align: center;
+  width: 60%;
+  border-radius: 10px;
+}
+
 
 
 /* SENSOR-CARD-COMPONENT */
@@ -209,6 +225,52 @@ a {
 .sensor-card .expand-icon:hover, .expanded-sensor-card .close-icon:hover{
   color: black;
 }
+
+
+/* CONTROL-CARD-COMPONENT */
+
+.control-card .card-body{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+
+
+/* THRESHOLD-CARD-COMPONENT */
+
+.threshold-card {
+  width: 100%;
+}
+
+.threshold-card .card-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.threshold-card .card-body{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.threshold-card .threshold-input{
+  width: 45%;
+}
+
+.threshold-card .slider-container{
+  padding: 0 10px;
+}
+
+
+
+
 
 
 
@@ -263,6 +325,25 @@ a {
 
 .info-section .section > :last-child {
   font-size: 1.125em;
+}
+
+.expanded-sensor-card .chart-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.expanded-sensor-card .time-range-select{
+  margin-top: 20px;
+  padding: 0 0;
+  width: 20%;
+  height: 3rem;
+  font-size: 0.75rem;
+}
+
+.expanded-sensor-card .time-range-options{
+  font-size: 0.5rem;
 }
 
 .expanded-sensor-card .chart{
@@ -338,8 +419,21 @@ a {
   padding: 5px;
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   border-radius: 10px;
+}
+
+.tab-content .tab-description{
+  margin-bottom: 30px;
+  padding-left: 10px;
+}
+
+.tab-content.active{
+  display: block;
+}
+
+.tab-content {
+  display: none;
 }
 
 .tablist .tab-btn {
@@ -459,6 +553,10 @@ header {
   font-size: 0.875em;
 }
 
+.navbar .login-btn:hover {
+  background-color: var(--secondary-hover-color);
+}
+
 .navbar .nav-links {
   width: 40%;
   max-width: 400px;
@@ -569,12 +667,18 @@ header {
 
 .breadcrumb a{
   /* font-size: 0.875em; */
-  color: var(--secondary-text-color);
+  /* color: var(--secondary-text-color); */
+  color: var(--primary-text-color);
 }
 
 .breadcrumb a:hover{
   cursor: pointer;
   color: var(--hover-text-color);
+}
+
+.breadcrumb li span{
+  color: var(--main-btn-color);
+  font-weight: bold;
 }
 
 

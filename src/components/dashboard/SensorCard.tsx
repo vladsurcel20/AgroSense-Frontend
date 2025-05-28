@@ -1,16 +1,17 @@
 import { Expand, Thermometer, Droplets, Sun} from 'lucide-react'
-
-
+import { Sensor } from '../../types/sensor'
+import { minMaxData } from './SensorGrid'
 
 interface SensorCardProps{
-  type: string,
-  setIsExpanded: (value: boolean) => void
+  sensor: Sensor,
+  value: number,
+  setExpandedSensor: (value: Sensor | null) => void
+  minMaxData: minMaxData
 }
 
-const SensorCard = ({type, setIsExpanded}: SensorCardProps ) => {
+const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardProps ) => {
 
-    const value = 25;
-    const unit = '°C';
+    const {type, unit} = sensor;
     const formatType = type.charAt(0).toUpperCase() + type.slice(1);
 
     const selectIcon = (type: string) => {
@@ -35,12 +36,14 @@ const SensorCard = ({type, setIsExpanded}: SensorCardProps ) => {
                 </div>
                 <Expand
                     size='16'
-                    onClick={() => setIsExpanded(true)}
+                    onClick={() => {
+                        setExpandedSensor(sensor);
+                    }}
                     className="expand-icon"
                 />
             </div>
             <div className="card-sub-header">
-                <h5>Device: Sensor 1 </h5>
+                <h5>Device: {sensor.name} </h5>
             </div>
             <div className='card-body'>
             <h1 style={{color: `var(--${type}-color)`}}>
@@ -48,8 +51,8 @@ const SensorCard = ({type, setIsExpanded}: SensorCardProps ) => {
                 </h1>
             </div>
             <div className='card-footer'>
-                <p>Min: {value-5}{unit}</p>
-                <p>Max: {value+2}{unit}</p>
+                <p>Min: {minMaxData.min}{unit}</p>
+                <p>Max: {minMaxData.max}{unit}</p>
             </div>
         </div>
   )

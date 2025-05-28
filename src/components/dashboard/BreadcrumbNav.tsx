@@ -131,8 +131,16 @@ const BreadcrumbNav = () => {
   }, [lastPath]);
 
   return (
-    <div className="navigation-section" style={{ width: "100%" }}>
-      <div className="presentation-section">
+    <div
+      className="navigation-section"
+      style={{
+        width: "100%"
+      }}
+    >
+      <div className="presentation-section"
+      style={{
+        marginBottom: lastPath === "sensors" ? "0px" : "20px",
+      }}>
         {icons[lastPath]}
 
         <div className="location-section">

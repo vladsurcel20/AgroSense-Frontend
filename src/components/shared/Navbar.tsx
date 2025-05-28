@@ -42,7 +42,7 @@ const Navbar = () => {
           </div>
           <ul className="nav-links">
               <li onClick={() => navigate("/home")}>Home</li>
-              <li onClick={() => navigate("/dashboard/location")}>Dashboard</li>
+              {user && <li onClick={() => navigate("/dashboard/location")}>Dashboard</li>}
               <li>Settings</li>
               <li>About</li>
           </ul>

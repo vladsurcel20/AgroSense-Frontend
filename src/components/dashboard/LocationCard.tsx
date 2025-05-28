@@ -11,7 +11,7 @@ interface LocationCardProps {
 
 const LocationCard = ({locationData}: LocationCardProps) => {
 
-    const { setCurrentLocation } = useDashboard()
+    const { setCurrentLocation, currentLocation } = useDashboard()
     const navigate = useNavigate()
     const location = useLocation()
     
@@ -30,8 +30,8 @@ const LocationCard = ({locationData}: LocationCardProps) => {
         }
     }
 
-    const selectLocation = () => {
-        updateLocationDate()
+    const selectLocation = async () => {
+        await updateLocationDate()
         setCurrentLocation(locationData)
         sessionStorage.setItem("location", JSON.stringify(locationData))
         sessionStorage.removeItem("greenhouse")
