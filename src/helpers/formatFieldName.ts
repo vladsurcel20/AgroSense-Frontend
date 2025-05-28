@@ -17,8 +17,8 @@ export const formatFieldName = (fieldName: string): string => {
   let result = words.join(' ');
   
   // Adaugă (Min/Max) la sfârșit dacă e cazul
-  if (fieldName.startsWith('min')) result = result.replace('Min ', '') + ' (Min)';
-  if (fieldName.startsWith('max')) result = result.replace('Max ', '') + ' (Max)';
+  // if (fieldName.startsWith('min')) result = result.replace('Min ', '') + ' (Min)';
+  // if (fieldName.startsWith('max')) result = result.replace('Max ', '') + ' (Max)';
 
   return result;
 };

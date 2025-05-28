@@ -1,4 +1,4 @@
-import { Expand, Thermometer, Droplets, Sun} from 'lucide-react'
+import { Expand, Thermometer, Droplets, Sun, Waves} from 'lucide-react'
 import { Sensor } from '../../types/sensor'
 import { minMaxData } from './SensorGrid'
 
@@ -11,8 +11,17 @@ interface SensorCardProps{
 
 const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardProps ) => {
 
-    const {type, unit} = sensor;
-    const formatType = type.charAt(0).toUpperCase() + type.slice(1);
+    const {type, unit, localization} = sensor;
+    const formatLocalization = localization?.charAt(0).toUpperCase() + localization?.slice(1);
+
+    const formatTypeName = (type: string): string => {
+        return type
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
+
+     const formatType = formatTypeName(type)
 
     const selectIcon = (type: string) => {
         switch(type){
@@ -22,17 +31,21 @@ const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardPr
                 return <Droplets size='24' color={`var(--${type}-color)`}/>;
             case 'light':
                 return <Sun size='24' color={`var(--${type}-color)`}/>;
+            case 'water_level':
+                return <Waves  size='24' color={`var(--humidity-color)`}/>;
             default:
                 return <Thermometer size='24' color={`var(--${type}-color)`}/>;
         }
     }
 
   return (
-        <div className='card sensor-card' style={{backgroundColor: `var(--${type}-color-light)`, borderColor: `var(--${type}-color)`}}>
+        <div className='card sensor-card' style={ type!=="water_level" ? {backgroundColor: `var(--${type}-color-light)`, borderColor: `var(--${type}-color)`} 
+            : {backgroundColor: `var(--humidity-color-light)`, borderColor: `var(--humidity-color)`}
+        }>
             <div className='card-header'>
                 <div className="left">
                     {selectIcon(type)}
-                    <h4>{formatType}</h4>
+                    <h4>{formatType} {formatLocalization ? formatLocalization : ''}</h4>
                 </div>
                 <Expand
                     size='16'
@@ -46,7 +59,7 @@ const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardPr
                 <h5>Device: {sensor.name} </h5>
             </div>
             <div className='card-body'>
-            <h1 style={{color: `var(--${type}-color)`}}>
+                <h1 style={ type!=="water_level" ? {color: `var(--${type}-color)`} : {color: `var(--humidity-color)`}}>
                     {value}{unit}
                 </h1>
             </div>

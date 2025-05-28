@@ -1,4 +1,4 @@
-import { Thermometer, Droplets, Sun, X} from 'lucide-react'
+import { Thermometer, Droplets, Sun, X, Waves} from 'lucide-react'
 import { LineChart } from '@mui/x-charts/LineChart';
 import React, { useState } from 'react';
 import { Sensor } from '../../types/sensor';
@@ -15,7 +15,14 @@ interface SensorCardProps{
 const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({expandedSensor, setExpandedSensor, value }, ref) => {
 
     const {type, unit} = expandedSensor;
-    const formatType = type.charAt(0).toUpperCase() + type.slice(1);
+    const formatTypeName = (type: string): string => {
+        return type
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
+
+    const formatType = formatTypeName(type)
     const {currentGreenhouse} = useDashboard();
 
     const [timeRange, setTimeRange] = useState<'24h' | '7d' | '30d'>('7d');
@@ -37,6 +44,8 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
                 return <Droplets size='24' color={`var(--${type}-color)`}/>;
             case 'light':
                 return <Sun size='24' color={`var(--${type}-color)`}/>;
+            case 'water_level':
+                return <Waves  size='24' color={`var(--humidity-color)`}/>;
             default:
                 return <Thermometer size='24' color={`var(--${type}-color)`}/>;
         }
@@ -73,7 +82,7 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
                 </div>
                 <div className='readings'>
                     <div> 
-                        <h1 style={{color: type ?  `var(--${type}-color)` : "#ff0000"}}>
+                        <h1 style={ type!=="water_level" ? {color: `var(--${type}-color)`} : {color: `var(--humidity-color)`}}>
                             {value}{unit}
                         </h1>
                         <h4 className='secondary-text' style={{textAlign: 'left'}}>Current value</h4>
@@ -83,13 +92,13 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
                             <h2>
                                 {minMaxData?.min || 0}{unit}
                             </h2>
-                            <h5 className='secondary-text'>Min (24h)</h5>
+                            <h5 className='secondary-text'>Min ({timeRange})</h5>
                         </div>
                         <div>
                             <h2>
                                 {minMaxData?.max || 100}{unit}
                             </h2>
-                            <h5 className='secondary-text'>Max (24h)</h5>
+                            <h5 className='secondary-text'>Max ({timeRange})</h5>
                         </div>
                     </div>
                 </div>

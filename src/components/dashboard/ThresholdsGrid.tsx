@@ -4,67 +4,56 @@ import axios, { AxiosError } from "axios";
 import { Sensor } from "../../types/sensor";
 import ThresholdCard from "./ThresholdCard";
 import { Culture } from "../../types/culture";
+import { ThresholdConfig, transformThresholdsToArray } from "../../helpers/thresholdToArray";
 
 const ThresholdsGrid = () => {
 
   const { currentGreenhouse } = useDashboard();
-  const [sensors, setSensors] = useState<Sensor[]>([]);
-  const baseUrl = `http://localhost:5000/api/sensors?greenhouseId=${currentGreenhouse!.id}`;
-  // const [thresholds, setThresholds] = useState<Culture>();
-  // const baseUrl = `http://localhost:5000/api/cultures/${currentGreenhouse!.cultureId}`
 
-  // useEffect(() => {
-  //   if (currentSensorReading) {
-  //     setIsLoading(false);
-  //   }
-  // }, [currentSensorReading]);
+  const [thresholds, setThresholds] = useState<ThresholdConfig[]>();
+  const [loading, setLoading] = useState(true);
+  const baseUrl = `http://localhost:5000/api/cultures/${currentGreenhouse!.cultureId}`
 
   useEffect(() => {
-    const fetchSensors = async () => {
+    const fetchThresholds = async () => {
       try {
-        const res = await axios.get(baseUrl, {
-          withCredentials: true,
-        });
-        const data = res.data;
-        const uniqueMap = new Map<string, Sensor>();
-        data.forEach((sensor: Sensor) => {
-          const key = `${sensor.type}-${sensor.localization}`;
-          if (!uniqueMap.has(key)) {
-            uniqueMap.set(key, sensor);
-          }
-        });
-        setSensors(Array.from(uniqueMap.values()));
-      } catch (error: AxiosError | any) {
-        console.error(error.response.data.message);
+        const res = await axios.get(baseUrl, { withCredentials: true });
+        const transformed = transformThresholdsToArray(res.data);
+        setThresholds(transformed);
+      } catch (error) {
+        console.error('Error fetching thresholds:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchSensors();
-  }, []);
+    if (currentGreenhouse?.cultureId) fetchThresholds();
+  }, [currentGreenhouse?.cultureId]);
 
-  //   useEffect(() => {
-  //   const fetchThresholds = async () => {
-  //     try {
-  //       const res = await axios.get(baseUrl, {
-  //         withCredentials: true,
-  //       });
-  //       const thresholdsData = res.data;
-  //       setThresholds(thresholdsData);
-  //     } catch (error: AxiosError | any) {
-  //       console.error(error.response.data.message);
-  //     }
-  //   };
-
-  //   fetchThresholds();
-  // }, []);
+  const handleSave = async (updatedConfig: ThresholdConfig) => {
+    try {
+      const payload = {
+        [updatedConfig.minField]: updatedConfig.minValue,
+        [updatedConfig.maxField]: updatedConfig.maxValue
+      };
+      
+      await axios.patch(baseUrl, payload, { withCredentials: true });
+      setThresholds(prev => prev?.map(t => 
+        t.type === updatedConfig.type ? updatedConfig : t
+      ));
+    } catch (error) {
+      console.error('Error updating thresholds:', error);
+    }
+  };
 
 
   return (
-    <div className='sensor-cards-grid'>
-        {sensors.map((sensor: Sensor) => (
+    <div className='threshold-cards-grid'>
+        {thresholds?.map((threshold: ThresholdConfig) => (
           <ThresholdCard
-            key={sensor.id}
-            type={sensor.type}
+            key={threshold?.cropId}
+            threshold={threshold}
+            // onSave={handleSave}
           />
         ))}
     </div>

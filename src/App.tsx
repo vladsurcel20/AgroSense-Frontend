@@ -12,7 +12,7 @@ import LandingPage from './pages/LandingPage';
 const App = () => {
   return (
     <>
-      <Toaster position="top-right" richColors closeButton={true}/>
+      <Toaster position="top-center" richColors closeButton={true}/>
       <AuthProvider>
         <Routes>
           <Route path='/auth' element={<AuthPage />} />

@@ -1,19 +1,3 @@
-@font-face {
-  font-family: 'Nunito';
-  src: url(public\fonts\Nunito-VariableFont_wght.ttf) format('truetype');
-  font-weight: 200 1000;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Playfair';
-  src: url(public\fonts\PlayfairDisplay-VariableFont_wght.ttf) format('truetype');
-  font-weight: 200 1000;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -132,6 +116,10 @@ a {
   cursor: pointer;
 }
 
+.secondary-btn:hover{ 
+  background-color: var(--secondary-hover-color);
+}
+
 /* CARD COMPONENT */
 
 .card {
@@ -174,9 +162,10 @@ a {
 .gh-card-header .culture-name {
   border: 1px solid var(--hover-text-color);
   font-size: 12px;
-  padding: 2px 0;
+  padding: 2px 4px;
   text-align: center;
   width: 60%;
+  min-width: fit-content;
   border-radius: 10px;
 }
 
@@ -267,6 +256,16 @@ a {
 .threshold-card .slider-container{
   padding: 0 10px;
 }
+
+
+ .threshold-cards-grid {
+  width: 100%;
+  max-width: 1260px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  justify-content: center;
+ }
 
 
 
@@ -382,17 +381,16 @@ a {
 .dashboard-page {
   overflow-y: auto;
   margin: 0 auto;
-  width: 960px;
+  width: 1200px;
+  max-width: 80%;
 }
 
 .location-cards-grid {
   width: 100%;
-  max-width: 900px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 15px;
   justify-content: center;
-  /* max-height: calc(160px * 2 + 30px); */
 }
 
 .sensor-cards-grid {
@@ -413,6 +411,33 @@ a {
   margin-bottom: 2em;
 }
 
+
+@media screen and (max-width: 768px) {
+  .sensor-cards-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+
+  .location-cards-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .sensor-cards-grid {
+    grid-template-columns: repeat(1, minmax(200px, 300px));
+  }
+}
+
+
+
+
+/* TABS */
+
 .tablist {
   width: fit-content;
   background-color: var(--secondary-btn-color);
@@ -421,11 +446,6 @@ a {
   justify-content: space-evenly;
   margin-bottom: 10px;
   border-radius: 10px;
-}
-
-.tab-content .tab-description{
-  margin-bottom: 30px;
-  padding-left: 10px;
 }
 
 .tab-content.active{
@@ -454,22 +474,34 @@ a {
   color: var(--primary-text-color);
 }
 
-@media screen and (max-width: 768px) {
-  .sensor-cards-grid {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-  }
-
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.tab-content .tab-header {
+  margin-bottom: 30px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-@media screen and (max-width: 500px) {
-  .sensor-cards-grid {
-    grid-template-columns: repeat(1, minmax(200px, 300px));
-  }
+.tab-header .tab-buttons-section {
+  display: flex;
+  gap: 5px;
 }
+
+.tab-header .tab-content-button {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 0.9em;
+}
+
+
+
+
+
+
+
 
 
 /* NAVBAR */
@@ -503,8 +535,6 @@ header {
   align-items: center;
   gap: 10px;
   font-size: 0.875em;
-  font-family: 'Playfair';
-  /* font-family: 'Nunito'; */
 }
 
 .logo-section .logo-wrapper {

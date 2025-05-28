@@ -8,6 +8,7 @@ import axios, { AxiosError } from 'axios';
 import { Sensor } from '../../types/sensor';
 import { useSensorMinMax } from '../../hooks/DashboardHooks';
 import { toast } from 'sonner';
+import { convertDistanceToLiters } from '../../helpers/waterLevelHelper';
 
 export interface minMaxData {
   sensorId: number;
@@ -29,7 +30,6 @@ const SensorGrid = () => {
   const baseUrl = `${import.meta.env.VITE_BASE_URL}/sensors?greenhouseId=${currentGreenhouse!.id}`;
 
   const { minMaxData } = useSensorMinMax(currentGreenhouse!.id, undefined, timeRange, true);
-  console.log("minMaxData", minMaxData);
 
   useEffect(() => {
     if (!minMaxData || !Array.isArray(minMaxData) || sensors.length === 0) return;
@@ -101,7 +101,22 @@ const SensorGrid = () => {
   };
 
   const getSensorValue = (sensorId: number) => {
-    return currentSensorReading?.readings?.[sensorId] ?? 0;
+    const rawValue = currentSensorReading?.readings?.[sensorId] ?? 0;
+    const sensor = sensors.find((s) => s.id === sensorId);
+
+    if (!sensor) return rawValue;
+
+    if (sensor.type === 'water_level') {
+      return convertDistanceToLiters(
+        rawValue,
+        sensor.height_cm,
+        sensor.width_cm,
+        sensor.length_cm,
+        sensor.radius_cm
+      );
+    }
+
+    return rawValue
   };
 
   return (
