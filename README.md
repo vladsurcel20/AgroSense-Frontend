@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# AgroSense Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **AgroSense** – a modern web application for smart greenhouse monitoring and automation.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌱 What is AgroSense?
 
-## Expanding the ESLint configuration
+AgroSense is a user-friendly platform that helps you **monitor**, **analyze**, and **control** your greenhouse environment in real time. With AgroSense, you can:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- View live sensor data (temperature, humidity, light, etc.)
+- Set and adjust optimal thresholds for your crops
+- Control actuators (pumps, fans, lights) manually or automatically
+- Manage multiple greenhouses and locations
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🚀 Features
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Dashboard**: Centralized view of all your greenhouses and their status
+- **Live Sensor Grid**: Real-time readings for all connected sensors
+- **Control Panel**: Instantly switch devices on/off or set them to auto mode
+- **Threshold Automation**: Define and edit optimal ranges for each parameter
+- **Historical Data & Predictions**: Visualize trends and get AI-powered forecasts
+- **Responsive Design**: Works great on desktop and mobile
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 🖼️ Screenshots
+
+<!-- Add screenshots from the app below -->
+![Landing Page](https://imgur.com/50uu8o2)
+![Login Page](https://imgur.com/UaksfA5)
+![Dashboard Page](https://imgur.com/cm2AJN6)
+![Sensors Grid](https://imgur.com/kgeSnM8)
+![Expanded Sensor](https://imgur.com/5HjpIAL)
+![Controls](https://imgur.com/EvwCEWW)
+![Thresholds Automation](https://imgur.com/XMebcPC)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React + TypeScript
+- **UI**: Material UI, Lucide Icons, Custom CSS
+- **State Management**: React Context API
+- **Real-time**: Socket.IO for live updates
+- **Backend**: (see AgroSense Backend repo)
+
+---
+
+## 📂 Project Structure
+
+- `src/components/dashboard/` – Main dashboard UI components
+- `src/contexts/` – Global state and socket management
+- `src/helpers/` – Utility functions (thresholds, formatting, etc.)
+- `src/types/` – TypeScript interfaces for app data
+- `src/styles/` – Global and component CSS
