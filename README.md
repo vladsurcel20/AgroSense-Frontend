@@ -28,14 +28,27 @@ AgroSense is a user-friendly platform that helps you **monitor**, **analyze**, a
 
 ## 🖼️ Screenshots
 
-<!-- Add screenshots from the app below -->
-![Landing Page](https://imgur.com/50uu8o2)
-![Login Page](https://imgur.com/UaksfA5)
-![Dashboard Page](https://imgur.com/cm2AJN6)
-![Sensors Grid](https://imgur.com/kgeSnM8)
-![Expanded Sensor](https://imgur.com/5HjpIAL)
-![Controls](https://imgur.com/EvwCEWW)
-![Thresholds Automation](https://imgur.com/XMebcPC)
+<h3>Landing Page</h3>
+<img src="https://imgur.com/50uu8o2.png" alt="Landing Page" />
+
+<h3>Login Page</h3>
+<img src="https://imgur.com/UaksfA5.png" alt="Login Page" />
+
+<h3>Dashboard Page</h3>
+<img src="https://imgur.com/cm2AJN6.png" alt="Dashboard Page" />
+
+<h3>Sensors Grid</h3>
+<img src="https://imgur.com/kgeSnM8.png" alt="Sensors Grid" />
+
+<h3>Expanded Sensor</h3>
+<img src="https://imgur.com/5HjpIAL.png" alt="Expanded Sensor" />
+
+<h3>Controls</h3>
+<img src="https://imgur.com/EvwCEWW.png" alt="Controls" />
+
+<h3>Thresholds Automation</h3>
+<img src="https://imgur.com/XMebcPC.png" alt="Thresholds Automation" />
+
 
 ---
 
