@@ -5,6 +5,7 @@ export interface Greenhouse {
     name: string;
     cultureId: string;
     status: string;
+    autoControlEnabled: boolean;
     isActive: boolean;
     locationId: number;
     lastVisited: Date;

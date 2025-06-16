@@ -37,6 +37,11 @@
   --light-color-control: #fffbeb;
   --light-color-control-border: #f59e0b;
 
+  --green-card-border: #22c55e;
+  --green-card-background: #dcfce7;
+  --green-card-text: #22c55e;
+
+
   --on-color: #4caf50;
   --off-color: #d3d3d3;
 
@@ -316,14 +321,16 @@ a {
 
 .info-section .section {
   background-color: var(--card-section-background);
-  width: clamp(120px, 45%, 300px);
+  /* width: clamp(120px, 45%, 300px); */
+  width: 100%;
   height: 5em;
   border-radius: 10px;
   padding: 10px;
 }
 
-.info-section .section > :last-child {
+.info-section .section > :first-child {
   font-size: 1.125em;
+  padding-bottom: 5px;
 }
 
 .expanded-sensor-card .chart-wrapper{

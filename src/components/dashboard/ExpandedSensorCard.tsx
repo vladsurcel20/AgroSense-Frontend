@@ -1,15 +1,17 @@
 import { Thermometer, Droplets, Sun, X, Waves} from 'lucide-react'
 import { LineChart } from '@mui/x-charts/LineChart';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Sensor } from '../../types/sensor';
 import { useSensorChartData, useSensorMinMax } from '../../hooks/DashboardHooks';
 import { useDashboard } from '../../contexts/DashboardContext';
 import { CompactMenuItem, CompactSelect } from '../material/CustomSelect';
+import { toast } from 'sonner';
+import axios, { Axios, AxiosError } from 'axios';
 
 interface SensorCardProps{
     expandedSensor: Sensor,
     setExpandedSensor: (value: Sensor | null) => void
-    value:number
+    value:number | undefined
   }
 
 const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({expandedSensor, setExpandedSensor, value }, ref) => {
@@ -25,9 +27,33 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
     const formatType = formatTypeName(type)
     const {currentGreenhouse} = useDashboard();
 
-    const [timeRange, setTimeRange] = useState<'24h' | '7d' | '30d'>('7d');
+    const [timeRange, setTimeRange] = useState<'24h' | '7d' | '30d'>('24h');
     const { chartData, loading } = useSensorChartData(expandedSensor.id, timeRange);
     const { minMaxData } = useSensorMinMax(currentGreenhouse!.id, expandedSensor.id, timeRange, false);
+    const [prediction, setPrediction] = useState();
+    const [predictionHoursAhead, setPredictionHoursAhead] = useState(6);
+
+    useEffect(() => {
+        const getPrediction = async () => {
+            try{
+                const res = await axios.post(`http://localhost:5000/api/predictions/forecast`, {
+                    "sensorId": expandedSensor.id,
+                    "modelType": "knn",
+                    "hoursAhead": predictionHoursAhead,
+                }, {
+                    withCredentials: true
+                })
+                if(res) {
+                    setPrediction(res.data.prediction)
+                    console.log(res.data)
+                }
+            } catch (error: AxiosError | any) {
+                console.error("Failed to get prediction", error)
+            }
+        }
+        getPrediction();
+    }, [predictionHoursAhead, expandedSensor.id]);
+
 
     const formatTimeLabel = (timestamp: string) => {
         const date = new Date(timestamp);
@@ -57,11 +83,25 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
             switch (type) {
                 case "temperature": return "#f84111";
                 case "humidity": return "#3b84ff";
+                case "water_level": return "#3b84ff";
                 case "light": return "#f59e0b";
                 default: return "gray";
             }
         }
     }
+
+    useEffect(() => {
+      if (timeRange === '24h' && minMaxData && minMaxData.hasData === false) {
+        setTimeRange('7d');
+        toast.warning(
+          `In ultimele 24h nu exista citiri pentru senzorul ${expandedSensor.name}.`,
+          {
+            description: "Au fost aduse inregistrarile din ultimele 7 zile.",
+            position: "top-center"
+          }
+        );
+      }
+    }, [expandedSensor.id, minMaxData, timeRange]);
 
   return (
     <div ref={ref} className='expanded-card expanded-sensor-card'>
@@ -120,8 +160,8 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
                         }]}
                         yAxis={[{
                             valueFormatter: (value) => `${value} ${expandedSensor.unit}`,
-                            min: 0,
-                            max: 100,
+                            min: type === 'water_level' ? Math.min(...chartData.map(d => d.value)) * 0.95 : 0,
+                            max: type === 'water_level' ? Math.max(...chartData.map(d => d.value)) * 1.05 : 100,
                         }]}                 
                         sx={{
                             '& .MuiChartsAxis-tickLabel': {
@@ -150,20 +190,26 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
                     </CompactSelect>
                 </div>
                 <div className='info-section'>
-                    <div className='section'>
+                    {/* <div className='section'>
                         <p>Status</p>
                         <p>Normal</p>
                     </div>
                     <div className='section'>
                         <p>Last updated</p>
                         <p>Today</p>
-                    </div>
+                    </div> */}
+                    <div className='section'>
+                    <p>Prediction:</p>
+                    <p>{prediction !== null
+                        ? `Estimated value for the next ${predictionHoursAhead} hours: ${prediction}${unit}`
+                        : "No predictions available for this sensor."}
+                    </p>
+                </div>
                 </div>
             </div>
-            <div className='card-footer'>
+            {/* <div className='card-footer'>
                 <button className='main-btn'>More Details</button>
-                {/* <button className='main-btn' onClick={() => setIsExpanded(false)}>Close</button> */}
-            </div>
+            </div> */}
     </div>
   )
 })

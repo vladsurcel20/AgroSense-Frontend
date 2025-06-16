@@ -66,7 +66,7 @@ const Navbar = () => {
             </div>
           ) : (
           <div className="nav-buttons">
-              <FontAwesomeIcon icon={faCircleHalfStroke} size="lg" className="theme-icon"/> 
+              {/* <FontAwesomeIcon icon={faCircleHalfStroke} size="lg" className="theme-icon"/>  */}
               <button className="login-btn" onClick={() => navigate("/auth", { state: { section: "login" } })}>Login</button>
               <button className="signup-btn" onClick={() => navigate("/auth", { state: { section: "signup" } })}>Sign Up</button>
           </div>

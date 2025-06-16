@@ -1,5 +1,4 @@
 import { Modal } from '@mui/material';
-// import expandedDeviceCard from './expandedDeviceCard';
 import Skeleton from '@mui/material/Skeleton';
 import { useEffect, useRef, useState } from 'react';
 import { useDashboard } from '../../contexts/DashboardContext';

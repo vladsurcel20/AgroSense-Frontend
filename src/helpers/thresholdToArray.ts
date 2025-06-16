@@ -52,10 +52,10 @@ export const transformThresholdsToArray = (culture: any): ThresholdConfig[] => {
       // Câmpuri min/max și valori
       if (minMax === 'min') {
         fieldGroups[groupKey].minField = key;
-        fieldGroups[groupKey].minValue = typeof value === 'number' ? value : 0;
+        fieldGroups[groupKey].minValue = typeof value === 'number' ? value : undefined;
       } else {
         fieldGroups[groupKey].maxField = key;
-        fieldGroups[groupKey].maxValue = typeof value === 'number' ? value : 0;
+        fieldGroups[groupKey].maxValue = typeof value === 'number' ? value : undefined;
       }
 
       // Salvăm un fieldName fără min/max pentru displayName
@@ -67,17 +67,24 @@ export const transformThresholdsToArray = (culture: any): ThresholdConfig[] => {
     }
   }
 
-  // Transformă în array și adaugă displayName fără min/max
+  // Transformă în array și adaugă displayName fără min/max, doar dacă valorile nu sunt null
   for (const config of Object.values(fieldGroups)) {
-    if (config.type && config.minField && config.maxField && config.displayNameBase) {
+    if (
+      config.type &&
+      config.minField &&
+      config.maxField &&
+      config.displayNameBase &&
+      config.minValue !== undefined &&
+      config.maxValue !== undefined
+    ) {
       result.push({
         type: config.type,
         displayName: formatFieldName(config.displayNameBase as string), // Fără min/max
         unit: config.unit || '',
         minField: config.minField || '',
         maxField: config.maxField || '',
-        minValue: config.minValue || 0,
-        maxValue: config.maxValue || 0,
+        minValue: config.minValue as number,
+        maxValue: config.maxValue as number,
         cropId: culture.id,
       });
     }

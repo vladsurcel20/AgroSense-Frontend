@@ -1,4 +1,3 @@
-// src/hooks/useSocket.ts
 import { useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import { useDashboard } from "../contexts/DashboardContext";
@@ -29,6 +28,10 @@ export function useSocket() {
     socket.on("command_response", (resp) => {
       console.log("⚡ command_response:", resp);
       // handle if needed
+    });
+
+    socket.on("command_sent", (resp) => {
+      console.log("✅ Command sent:", resp);
     });
 
     return () => {

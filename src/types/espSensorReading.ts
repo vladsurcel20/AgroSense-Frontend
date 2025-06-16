@@ -3,4 +3,7 @@ export interface EspSensorReadings {
   readings: {
     [sensorId: string]: number;
   };
+  devicesState: {
+    [deviceId: string]: boolean;
+  };
 }

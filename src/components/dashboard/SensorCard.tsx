@@ -1,10 +1,11 @@
 import { Expand, Thermometer, Droplets, Sun, Waves} from 'lucide-react'
 import { Sensor } from '../../types/sensor'
 import { minMaxData } from './SensorGrid'
+import { CircularProgress } from '@mui/material';
 
 interface SensorCardProps{
   sensor: Sensor,
-  value: number,
+  value: number | undefined,
   setExpandedSensor: (value: Sensor | null) => void
   minMaxData: minMaxData
 }
@@ -59,9 +60,13 @@ const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardPr
                 <h5>Device: {sensor.name} </h5>
             </div>
             <div className='card-body'>
-                <h1 style={ type!=="water_level" ? {color: `var(--${type}-color)`} : {color: `var(--humidity-color)`}}>
-                    {value}{unit}
-                </h1>
+                {value  ? (
+                    <h1 style={ type!=="water_level" ? {color: `var(--${type}-color)`} : {color: `var(--humidity-color)`}}>
+                        {value}{unit}
+                    </h1>
+                ) : (
+                    <CircularProgress sx={type!=="water_level" ? {color: `var(--${type}-color)`} : {color: `var(--humidity-color)`}}/>
+                )}
             </div>
             <div className='card-footer'>
                 <p>Min: {minMaxData.min}{unit}</p>

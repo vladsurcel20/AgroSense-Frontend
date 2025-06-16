@@ -101,10 +101,10 @@ const SensorGrid = () => {
   };
 
   const getSensorValue = (sensorId: number) => {
-    const rawValue = currentSensorReading?.readings?.[sensorId] ?? 0;
-    const sensor = sensors.find((s) => s.id === sensorId);
+    const rawValue = currentSensorReading?.readings?.[sensorId]
+    const sensor = sensors?.find((s) => s.id === sensorId);
 
-    if (!sensor) return rawValue;
+    if (!sensor || rawValue == null) return undefined;
 
     if (sensor.type === 'water_level') {
       return convertDistanceToLiters(
