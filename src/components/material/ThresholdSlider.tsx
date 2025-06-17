@@ -8,7 +8,7 @@ interface CustomRangeSliderProps extends SliderProps {
 }
 
 const ThresholdSlider = styled(Slider)<CustomRangeSliderProps>(
-  ({ theme, innerColor = '#bbf7d0', outerColor = '#fecaca', thumbColor = '#fff' }) => ({
+  ({ innerColor = '#bbf7d0', outerColor = '#fecaca', thumbColor = '#fff' }) => ({
     color: outerColor, // Culoarea de bază (pentru exteriorul intervalului)
     height: 8,
     '& .MuiSlider-thumb': {

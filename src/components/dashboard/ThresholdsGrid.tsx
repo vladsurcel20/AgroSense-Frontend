@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useDashboard } from "../../contexts/DashboardContext";
 import ThresholdCard from "./ThresholdCard";
 

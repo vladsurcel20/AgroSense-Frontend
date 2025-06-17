@@ -1,7 +1,7 @@
 import { MenuItem, Select } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const CompactSelect = styled(Select)(({ theme }) => ({
+export const CompactSelect = styled(Select)(() => ({
     minHeight: '36px',
     height: '36px',
     marginTop: '30px',

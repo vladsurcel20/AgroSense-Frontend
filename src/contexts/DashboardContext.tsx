@@ -2,7 +2,7 @@ import React, { useContext, useState, createContext, ReactNode, useEffect } from
 import { Location } from "../types/location";
 import { Greenhouse } from "../types/greenhouse";
 import { EspSensorReadings } from "../types/espSensorReading";
-import axios, { AxiosError } from "axios";
+import axios from "axios"; // Remove AxiosError
 import { ThresholdConfig, transformThresholdsToArray } from "../helpers/thresholdToArray";
 
 interface DashboardContext {
