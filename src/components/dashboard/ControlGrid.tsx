@@ -1,21 +1,15 @@
-import { Modal } from '@mui/material';
-import Skeleton from '@mui/material/Skeleton';
-import { useEffect, useRef, useState } from 'react';
-import { useDashboard } from '../../contexts/DashboardContext';
-import axios, { AxiosError } from 'axios';
-import { ControlDevice } from '../../types/controlDevice';
+import { useEffect, useState } from 'react';
 import ControlCard from './ControlCard';
+import { ControlDevice } from '../../types/controlDevice';
+import axios, { AxiosError } from 'axios';
+import { useDashboard } from '../../contexts/DashboardContext';
 
 const ControlGrid = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [devices, setDevices] = useState<ControlDevice[]>([]);
   const [expandedDevice, setExpandedDevice] = useState<ControlDevice | null>(null);
   const { currentGreenhouse } = useDashboard();
 
-  // const modalRef = useRef<HTMLDivElement | null>(null);
-
   const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/devices?greenhouseId=${currentGreenhouse!.id}`;
-
 
   useEffect(() => {
     const fetchDevices = async () => {
@@ -39,10 +33,6 @@ const ControlGrid = () => {
     }
   }, [expandedDevice]);
 
-  const handleClose = () => {
-    setExpandedDevice(null);
-  };
-
   return (
     <>
       <div className='sensor-cards-grid'>
@@ -54,20 +44,6 @@ const ControlGrid = () => {
           />
         ))}
       </div>
-
-      {/* {expandedDevice && (
-        <Modal
-          open={!!expandedDevice}
-          onClose={handleClose}
-        >
-          <ExpandedDeviceCard
-            ref={modalRef}
-            setexpandedDevice={setexpandedDevice}
-            expandedDevice={expandedDevice}
-            value={getSensorValue(expandedDevice.id)}
-          />
-        </Modal>
-      )} */}
     </>
   );
 };

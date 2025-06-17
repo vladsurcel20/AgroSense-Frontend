@@ -1,4 +1,4 @@
-import { Expand, Thermometer, Droplets, Sun, Fan } from 'lucide-react'
+import { Thermometer, Droplets, Sun, Fan } from 'lucide-react'
 import { useEffect, useState } from 'react';
 import CustomSwitch from '../material/CustomSwitch';
 import { ControlDevice } from '../../types/controlDevice';
@@ -9,10 +9,10 @@ import { useDashboard } from '../../contexts/DashboardContext';
 
 interface ControlCardProps{
   device: ControlDevice,
-  setExpandedDevice: (value: ControlDevice | null) => void
+  setExpandedDevice?: (value: ControlDevice | null) => void 
 }
     
-const ControlCard = ({device, setExpandedDevice}: ControlCardProps) => {
+const ControlCard = ({device}: ControlCardProps) => {
 
     const { currentSensorReading } = useDashboard();
 

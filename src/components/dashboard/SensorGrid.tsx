@@ -1,7 +1,6 @@
 import SensorCard from './SensorCard';
 import { Modal } from '@mui/material';
 import ExpandedSensorCard from './ExpandedSensorCard';
-import Skeleton from '@mui/material/Skeleton';
 import { useEffect, useRef, useState } from 'react';
 import { useDashboard } from '../../contexts/DashboardContext';
 import axios, { AxiosError } from 'axios';
@@ -19,7 +18,6 @@ export interface minMaxData {
 }
 
 const SensorGrid = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [sensors, setSensors] = useState<Sensor[]>([]);
   const [expandedSensor, setExpandedSensor] = useState<Sensor | null>(null);
   const [timeRange, setTimeRange] = useState<'24h' | '7d' | '30d'>('24h');
@@ -67,12 +65,6 @@ const SensorGrid = () => {
       );
   }
 }, [minMaxData, sensors]);
-
-  useEffect(() => {
-    if (currentSensorReading) {
-      setIsLoading(false);
-    }
-  }, [currentSensorReading]);
 
   useEffect(() => {
     const fetchSensors = async () => {

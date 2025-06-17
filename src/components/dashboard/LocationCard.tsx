@@ -11,7 +11,7 @@ interface LocationCardProps {
 
 const LocationCard = ({locationData}: LocationCardProps) => {
 
-    const { setCurrentLocation, currentLocation } = useDashboard()
+    const { setCurrentLocation } = useDashboard()
     const navigate = useNavigate()
     const location = useLocation()
     

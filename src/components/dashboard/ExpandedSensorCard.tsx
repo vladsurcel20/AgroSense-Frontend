@@ -6,7 +6,7 @@ import { useSensorChartData, useSensorMinMax } from '../../hooks/DashboardHooks'
 import { useDashboard } from '../../contexts/DashboardContext';
 import { CompactMenuItem, CompactSelect } from '../material/CustomSelect';
 import { toast } from 'sonner';
-import axios, { Axios, AxiosError } from 'axios';
+import axios from 'axios';
 
 interface SensorCardProps{
     expandedSensor: Sensor,
@@ -28,10 +28,10 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
     const {currentGreenhouse} = useDashboard();
 
     const [timeRange, setTimeRange] = useState<'24h' | '7d' | '30d'>('24h');
-    const { chartData, loading } = useSensorChartData(expandedSensor.id, timeRange);
+    const { chartData } = useSensorChartData(expandedSensor.id, timeRange);
     const { minMaxData } = useSensorMinMax(currentGreenhouse!.id, expandedSensor.id, timeRange, false);
     const [prediction, setPrediction] = useState();
-    const [predictionHoursAhead, setPredictionHoursAhead] = useState(6);
+    const [predictionHoursAhead] = useState(6);
 
     useEffect(() => {
         const getPrediction = async () => {
@@ -47,7 +47,7 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
                     setPrediction(res.data.prediction)
                     console.log(res.data)
                 }
-            } catch (error: AxiosError | any) {
+            } catch (error) {
                 console.error("Failed to get prediction", error)
             }
         }

@@ -12,7 +12,7 @@ interface ThresholdCardProps {
 const ThresholdCard = ({ threshold }: ThresholdCardProps) => {
   const { thresholdsEditable, updateThreshold } = useDashboard();
   
-  const { type, unit, displayName, minField, maxField, minValue, maxValue } = threshold;
+  const { type, unit, displayName, minValue, maxValue } = threshold;
   const [localMin, setLocalMin] = useState(minValue);
   const [localMax, setLocalMax] = useState(maxValue);
   const [sliderValue, setSliderValue] = useState<number[]>([minValue, maxValue]);
@@ -35,7 +35,7 @@ const ThresholdCard = ({ threshold }: ThresholdCardProps) => {
   const minSlider = Math.floor(minValue - buffer);
   const maxSlider = Math.ceil(maxValue + buffer);
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
     if (!Array.isArray(newValue)) return;
     
     setSliderValue(newValue);
