@@ -14,7 +14,7 @@ const ControlGrid = () => {
 
   // const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const baseUrl = `http://localhost:5000/api/devices?greenhouseId=${currentGreenhouse!.id}`;
+  const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/devices?greenhouseId=${currentGreenhouse!.id}`;
 
 
   useEffect(() => {

@@ -8,7 +8,7 @@ export const useSensorChartData = (sensorId: number, period: string) => {
   useEffect(() => {
     const fetchChartData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/sensor_readings/chart`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/sensor_readings/chart`, {
           params: { sensorId, period },
           withCredentials: true
         });
@@ -45,7 +45,7 @@ export const useSensorMinMax = (greenhouseId: number, sensorId?: number, period:
           params.all = 'true';
         }
 
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/sensor_readings/${greenhouseId}/minmax`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/sensor_readings/${greenhouseId}/minmax`, {
           params,
           withCredentials: true
         });

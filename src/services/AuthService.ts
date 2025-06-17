@@ -1,17 +1,14 @@
 import axios, { AxiosError } from "axios"
 import { toast } from "sonner"
 
-const baseUrl = "http://localhost:5000/api/auth"
-
 interface AuthResponse {
     message?: string; 
     user?: any
   }
 
-
 export const loginAPI = async (email: string, password: string) => {
     try{
-        const res = await axios.post(baseUrl + "/login", 
+        const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, 
             {email, password},
             { 
                 headers: { 'Content-Type': 'application/json' },
@@ -34,7 +31,7 @@ export const loginAPI = async (email: string, password: string) => {
 
 export const registerAPI = async (firstName: string, lastName: string, email: string, password: string) => {
     try{
-        const res = await axios.post(baseUrl + "/register", 
+        const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, 
             {firstName, lastName, email, password},
             { 
                 headers: { 'Content-Type': 'application/json' },
@@ -55,7 +52,7 @@ export const registerAPI = async (firstName: string, lastName: string, email: st
 
 export const logoutAPI = async () => {
     try{
-        const res = await axios.post(baseUrl + "/logout", {}, {withCredentials: true})
+        const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/logout`, {}, {withCredentials: true})
         if(res){
             toast.success(res.data.message)
         }
@@ -67,7 +64,7 @@ export const logoutAPI = async () => {
 
 export const checkAuthAPI = async () => {
     try{
-        const res = await axios.get("http://localhost:5000/api/users/me", {withCredentials: true})
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/me`, {withCredentials: true})
         if(res.status === 401){
             toast.error(res.data.message)
         }

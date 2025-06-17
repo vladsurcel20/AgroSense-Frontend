@@ -12,7 +12,7 @@ export function useSocket() {
     if (!currentGreenhouse) return;
     const ghId = currentGreenhouse.id;
 
-    const socket = io(import.meta.env.VITE_WS_URL || "http://localhost:5000");
+    const socket = io(import.meta.env.VITE_WS_URL);
     console.log("Attempting socket connect…");
     socketRef.current = socket;
 

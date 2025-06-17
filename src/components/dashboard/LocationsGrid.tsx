@@ -5,16 +5,14 @@ import { useDashboard } from '../../contexts/DashboardContext'
 
 const LocationsGrid = () => {
 
-  const baseUrl = "http://localhost:5000/api/locations?count=true"
+  const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/locations?count=true`
 
   const {searchedLocations, setLocations} = useDashboard()
 
   useEffect(() => {
     const fetchLocations = async () => {
       try{
-        const res = await axios.get(baseUrl, {
-          withCredentials: true,
-        })
+        const res = await axios.get(baseUrl, { withCredentials: true })
         const data = res.data
         setLocations(data)
       } catch (error: AxiosError | any) {

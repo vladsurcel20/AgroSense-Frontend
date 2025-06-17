@@ -17,11 +17,9 @@ const LocationCard = ({locationData}: LocationCardProps) => {
     
     const pathname = location.pathname;
 
-    const baseURL = "http://localhost:5000/api/locations/"
-
     const updateLocationDate = async () => {
         try {
-            const res  = await axios.put(baseURL + locationData.id, {}, {
+            const res  = await axios.put(`${import.meta.env.VITE_API_BASE_URL}locations/${locationData.id}`, {}, {
                 withCredentials: true,
             })
             locationData = res.data

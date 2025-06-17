@@ -27,7 +27,7 @@ const SensorGrid = () => {
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const baseUrl = `${import.meta.env.VITE_BASE_URL}/sensors?greenhouseId=${currentGreenhouse!.id}`;
+  const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/sensors?greenhouseId=${currentGreenhouse!.id}`;
 
   const { minMaxData } = useSensorMinMax(currentGreenhouse!.id, undefined, timeRange, true);
 

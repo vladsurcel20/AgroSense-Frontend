@@ -61,7 +61,7 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
       if (!currentGreenhouse?.id) return;
       
       try {
-        const baseUrl = `${import.meta.env.VITE_BASE_URL || 'http://localhost:5000/api'}/gh_preferences/${currentGreenhouse.id}`;
+        const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/gh_preferences/${currentGreenhouse.id}`;
         const res = await axios.get(baseUrl, { withCredentials: true });
         const transformed = transformThresholdsToArray(res.data);
         setThresholds(transformed);
@@ -98,7 +98,7 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
     if (!currentGreenhouse?.id || !pendingThresholds) return false;
     
     try {
-      const baseUrl = `${import.meta.env.VITE_BASE_URL || 'http://localhost:5000/api'}/gh_preferences/${currentGreenhouse.id}`;
+      const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/gh_preferences/${currentGreenhouse.id}`;
       
       // Prepare payload with all changed fields
       const payload: Record<string, number> = {};

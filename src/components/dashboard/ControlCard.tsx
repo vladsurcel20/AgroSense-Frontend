@@ -36,7 +36,7 @@ const ControlCard = ({device, setExpandedDevice}: ControlCardProps) => {
 
     const updateDevice = async (newState: boolean) => {
         try{
-            await axios.patch(`http://localhost:5000/api/devices/${device.id}`, {
+            await axios.patch(`${import.meta.env.VITE_API_BASE_URL}/devices/${device.id}`, {
                 state: newState,
                 lastActivity: Date.now() 
             }, {
@@ -59,7 +59,7 @@ const ControlCard = ({device, setExpandedDevice}: ControlCardProps) => {
 
             console.log(payload)
 
-            await axios.post(`http://localhost:5000/api/device_commands`, payload, {
+            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/device_commands`, payload, {
                 withCredentials: true
             })
         } catch (error: AxiosError | any) {

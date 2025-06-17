@@ -36,7 +36,7 @@ const ExpandedSensorCard = React.forwardRef<HTMLDivElement, SensorCardProps>(({e
     useEffect(() => {
         const getPrediction = async () => {
             try{
-                const res = await axios.post(`http://localhost:5000/api/predictions/forecast`, {
+                const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/predictions/forecast`, {
                     "sensorId": expandedSensor.id,
                     "modelType": "knn",
                     "hoursAhead": predictionHoursAhead,

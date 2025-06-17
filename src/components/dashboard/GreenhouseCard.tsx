@@ -15,7 +15,6 @@ const GreenhouseCard = ({greenhouseData}: GreenhouseCardProps) => {
     const location = useLocation()
     
     const pathname = location.pathname;
-    const baseURL = "http://localhost:5000/api/greenhouses/"
 
     const cultureName = greenhouseData.culture?.name
         ? greenhouseData.culture.name.charAt(0).toUpperCase() + greenhouseData.culture.name.slice(1)
@@ -23,7 +22,7 @@ const GreenhouseCard = ({greenhouseData}: GreenhouseCardProps) => {
 
     const updateGreenhouseDate = async () => {
         try {
-            const res  = await axios.patch(baseURL + greenhouseData.id, {}, {
+            const res  = await axios.patch(`${import.meta.env.VITE_API_BASE_URL}greenhouses/${greenhouseData.id}`, {}, {
                 withCredentials: true,
             })
             greenhouseData = res.data

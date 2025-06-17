@@ -38,7 +38,7 @@ const ControlsGrid = () => {
       const newAutoMode = !currentGreenhouse.autoControlEnabled;
       
       // Update greenhouse in the backend
-      const baseUrl = `${import.meta.env.VITE_BASE_URL || 'http://localhost:5000/api'}/greenhouses/${currentGreenhouse.id}`;
+      const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/greenhouses/${currentGreenhouse.id}`;
       await axios.patch(baseUrl, { autoControlEnabled: newAutoMode }, { withCredentials: true });
       
       setCurrentGreenhouse(prev => {
