@@ -11,7 +11,7 @@ interface ThresholdCardProps {
 
 const ThresholdCard = ({ threshold }: ThresholdCardProps) => {
   const { thresholdsEditable, updateThreshold } = useDashboard();
-  
+
   const { type, unit, displayName, minValue, maxValue } = threshold;
   const [localMin, setLocalMin] = useState(minValue);
   const [localMax, setLocalMax] = useState(maxValue);
@@ -109,7 +109,7 @@ const ThresholdCard = ({ threshold }: ThresholdCardProps) => {
               <TextField
                 id="min"
                 type="number"
-                label={"Min value (" + unit + ")"}
+                label={`Min (${unit})`}
                 size='small'
                 aria-valuemin={0}
                 variant="outlined"
@@ -126,7 +126,7 @@ const ThresholdCard = ({ threshold }: ThresholdCardProps) => {
               <TextField
                 id="max"
                 type="number"
-                label={"Max value (" + unit + ")"}
+                label={`Max (${unit})`}
                 size='small'
                 variant="outlined"
                 className="threshold-input"

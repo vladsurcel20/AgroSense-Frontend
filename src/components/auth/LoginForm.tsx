@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextField, InputAdornment, Tooltip} from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from "react-i18next";
 import styles from '../../pages/Auth.module.css'
 
 interface Props{
@@ -12,20 +13,19 @@ interface Props{
 }
 
 const LoginForm = ({handleSectionChange, setEmail, setPassword, handleSubmitLogin}: Props) => {
-
-const [showPassword, setShowPassword] = useState<boolean>(false)
-
+  const { t } = useTranslation();
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   return (
     <div className={styles.formContainer}>
-      <h1>Log in to your account</h1>
-      <h2 className={styles.secondaryText}>Welcome back!</h2>
+      <h1>{t("auth.loginTitle")}</h1>
+      <h2 className={styles.secondaryText}>{t("auth.loginWelcome")}</h2>
 
       <form className={styles.form} onSubmit={handleSubmitLogin}>
         <TextField
           id="outlined-email-input"
           type= "email"
-          label="Email"
+          label={t("auth.loginEmail")}
           autoComplete='email'
           variant="outlined"
           fullWidth
@@ -57,7 +57,7 @@ const [showPassword, setShowPassword] = useState<boolean>(false)
 
         <TextField
           id="outlined-password-input"
-          label="Password"
+          label={t("auth.loginPassword")}
           type = {!showPassword ? "password" : "text"}
           autoComplete="current-password"
           variant="outlined"
@@ -107,16 +107,19 @@ const [showPassword, setShowPassword] = useState<boolean>(false)
         <div className={styles.between}>
           <div>
             <input id="rememberCheckbox" type='checkbox' />
-            <label id="rememberText" htmlFor="rememberCheckbox" className={styles.secondaryText}>Remember me</label>
+            <label id="rememberText" htmlFor="rememberCheckbox" className={styles.secondaryText}>
+              {t("auth.loginRemember")}
+            </label>
           </div>
-
-          <span className={styles.actionText}>Forgot password</span>
+          <span className={styles.actionText}>{t("auth.loginForgot")}</span>
         </div>
 
-        <button className={styles.submitButton} type='submit'>Log in</button>
+        <button className={styles.submitButton} type='submit'>{t("auth.loginButton")}</button>
 
         <div className={styles.center}>
-          <p className={styles.secondaryText}>Don't have an account?  <span className={styles.actionText} onClick={handleSectionChange}>Create an account</span></p>
+          <p className={styles.secondaryText}>
+            {t("auth.loginNoAccount")} <span className={styles.actionText} onClick={handleSectionChange}>{t("auth.loginCreateAccount")}</span>
+          </p>
         </div>
       </form>
     </div>

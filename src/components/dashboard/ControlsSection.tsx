@@ -7,8 +7,15 @@ import { Power, PowerOff, Save, SquarePen } from 'lucide-react';
 import { useDashboard } from '../../contexts/DashboardContext';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { useTranslation } from "react-i18next";
 
 const ControlsGrid = () => {
+  const { t } = useTranslation();
+  const tabsDisplay = [
+    t("sensorsTab"),
+    t("controlsTab"),
+    t("automationTab")
+  ];
   const tabs = ['sensors', 'controls', 'automation'];
   const [selectedTab, setSelectedTab] = useState("sensors");
   const { 
@@ -37,7 +44,6 @@ const ControlsGrid = () => {
     try {
       const newAutoMode = !currentGreenhouse.autoControlEnabled;
       
-      // Update greenhouse in the backend
       const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/greenhouses/${currentGreenhouse.id}`;
       await axios.patch(baseUrl, { autoControlEnabled: newAutoMode }, { withCredentials: true });
       
@@ -59,8 +65,8 @@ const ControlsGrid = () => {
   const handleToggleAutoMode = async () => {
     const success = await toggleAutoMode();
     if (success) {
-      const mode = currentGreenhouse?.autoControlEnabled ? "disabled" : "enabled";
-      toast.success(`Auto mode ${mode} successfully`);
+      const mode = currentGreenhouse?.autoControlEnabled ? t("disableAutoMode") : t("enableAutoMode");
+      toast.success(`${mode} successfully`);
     } else {
       toast.error("Failed to toggle auto mode");
     }
@@ -69,35 +75,35 @@ const ControlsGrid = () => {
   return (
     <>
       <div className='tablist'>
-        {tabs.map((tab) => (
+        {tabsDisplay.map((tabLabel, idx) => (
           <button
-            key={tab}
-            className={`tab-btn ${selectedTab === tab ? 'active' : ''}`}
-            id={tab}
-            onClick={() => setSelectedTab(tab)}
+            key={tabs[idx]}
+            className={`tab-btn ${selectedTab === tabs[idx] ? 'active' : ''}`}
+            id={tabs[idx]}
+            onClick={() => setSelectedTab(tabs[idx])}
           >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {tabLabel}
           </button>
         ))}
       </div>
 
       <div className={"tab-content " + (selectedTab==="sensors" ? "active" : "")}>
         <div className='tab-header'>
-          <p className='tab-description'>Monitor the current readings of your sensors.</p>
+          <p className='tab-description'>{t("sensorsTabDescription")}</p>
         </div>
         <SensorGrid />
       </div>
 
       <div className={'tab-content ' + (selectedTab==="controls" ? "active" : "")}>
         <div className='tab-header'>
-          <p>Control your devices and actuators.</p>
+          <p>{t("controlsTabDescription")}</p>
         </div>
         <ControlGrid />
       </div>
 
       <div className={'tab-content ' + (selectedTab==="automation" ? "active" : "")}>
         <div className='tab-header'>
-          <p className='tab-description'>Define optimal ranges for your greenhouse parameters.</p>
+          <p className='tab-description'>{t("automationTabDescription")}</p>
           <div className='tab-buttons-section'>
             {thresholdsEditable ? (
               <>
@@ -105,13 +111,13 @@ const ControlsGrid = () => {
                   className='tab-content-button secondary-btn' 
                   onClick={cancelThresholds}
                 >
-                  Cancel
+                  {t("cancel")}
                 </button>
                 <button 
                   className='tab-content-button main-btn'
                   onClick={handleSaveThresholds}
                 >
-                  <Save size={14}/> Save Changes
+                  <Save size={14}/> {t("saveChanges")}
                 </button>
               </>
             ) : (
@@ -121,16 +127,16 @@ const ControlsGrid = () => {
                   onClick={handleToggleAutoMode}
                 >
                   {currentGreenhouse?.autoControlEnabled ? (
-                    <><PowerOff size={14} color='red'/> Disable Auto Mode</>
+                    <><PowerOff size={14} color='red'/> {t("disableAutoMode")}</>
                   ) : (
-                    <><Power size={14} color='var(--main-btn-color)'/> Enable Auto Mode</>
+                    <><Power size={14} color='var(--main-btn-color)'/> {t("enableAutoMode")}</>
                   )}
                 </button>
                 <button 
                   className='tab-content-button main-btn' 
                   onClick={() => setThresholdsEditable(true)}
                 >
-                  <SquarePen size={14}/>Edit Thresholds
+                  <SquarePen size={14}/> {t("editThresholds")}
                 </button>
               </>
             )}

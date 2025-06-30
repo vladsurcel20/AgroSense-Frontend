@@ -1,4 +1,5 @@
 import { formatFieldName } from "./formatFieldName";
+import i18n from 'i18next';
 
 export interface ThresholdConfig {
   type: string;                 // temperature, humidity, light
@@ -77,9 +78,21 @@ export const transformThresholdsToArray = (culture: any): ThresholdConfig[] => {
       config.minValue !== undefined &&
       config.maxValue !== undefined
     ) {
+      let displayName = '';
+      const typeLabel = i18n.t(`deviceNames.${config.type}`, formatFieldName(config.displayNameBase as string));
+      if (config.localization) {
+        const locLabel = i18n.t(`sensorLocalization.${config.localization}`, config.localization.charAt(0).toUpperCase() + config.localization.slice(1));
+        if (i18n.language === 'ro') {
+          displayName = `${typeLabel} ${locLabel}`;
+        } else {
+          displayName = `${locLabel} ${typeLabel}`;
+        }
+      } else {
+        displayName = typeLabel;
+      }
       result.push({
         type: config.type,
-        displayName: formatFieldName(config.displayNameBase as string), // Fără min/max
+        displayName,
         unit: config.unit || '',
         minField: config.minField || '',
         maxField: config.maxField || '',

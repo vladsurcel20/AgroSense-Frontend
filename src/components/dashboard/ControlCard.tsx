@@ -1,4 +1,5 @@
 import { Thermometer, Droplets, Sun, Fan } from 'lucide-react'
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import CustomSwitch from '../material/CustomSwitch';
 import { ControlDevice } from '../../types/controlDevice';
@@ -14,25 +15,28 @@ interface ControlCardProps{
     
 const ControlCard = ({device}: ControlCardProps) => {
 
-    const { currentSensorReading } = useDashboard();
+    const { t } = useTranslation();
 
-    const initialState = currentSensorReading?.devicesState?.[device.type] !== undefined
-        ? Boolean(currentSensorReading.devicesState[device.type])
-        : Boolean(device.state);
-
-    const [isOn, setIsOn] = useState<boolean>(initialState);
+    const [isOn, setIsOn] = useState<boolean>(Boolean(device.state));
     const [isLoading, setIsLoading] = useState(false)
+    const { currentGreenhouse, setCurrentGreenhouse } = useDashboard();    
     const { type } = device;
     const typeFirstDisplay = type.split('_')[0] === "water" ? "humidity" : type.split('_')[0];
     const { sendCommand } = useSocket()
+    const { currentSensorReading } = useDashboard();
 
     useEffect(() => {
-        if (currentSensorReading?.devicesState?.[device.type] !== undefined) {
-            setIsOn(Boolean(currentSensorReading.devicesState[device.type]));
-        } else {
-            if (device.state) setIsOn(Boolean(device.state));
-        }
-    }, [currentSensorReading, device.type, device.state]);
+        setIsOn(Boolean(device.state));
+    }, [device.state]);
+
+    // useEffect(() => {
+    //     const deviceReading = currentSensorReading?.devicesState[device.type];
+    //     if (deviceReading && typeof deviceReading !== "undefined") {
+    //         if (Boolean(deviceReading) !== isOn) {
+    //             setIsOn(Boolean(deviceReading));
+    //         }
+    //     }
+    // }, [currentSensorReading, device.id, isOn]);
 
     const updateDevice = async (newState: boolean) => {
         try{
@@ -57,8 +61,6 @@ const ControlCard = ({device}: ControlCardProps) => {
                 initiatedBy: "manual"
             };
 
-            console.log(payload)
-
             await axios.post(`${import.meta.env.VITE_API_BASE_URL}/device_commands`, payload, {
                 withCredentials: true
             })
@@ -68,51 +70,74 @@ const ControlCard = ({device}: ControlCardProps) => {
         }
     } 
 
+    const toggleOffAutoMode = async (): Promise<boolean> => {
+        if (!currentGreenhouse) return false;
+        
+        try {
+        const baseUrl = `${import.meta.env.VITE_API_BASE_URL}/greenhouses/${currentGreenhouse.id}`;
+        await axios.patch(baseUrl, { autoControlEnabled: false }, { withCredentials: true });
+        
+        setCurrentGreenhouse(prev => {
+            if (!prev) return prev;
+            return {
+                ...prev,
+                autoControlEnabled: false
+            };
+        });
+        
+        return true;
+        } catch (error) {
+            console.error('Error toggling auto mode:', error);
+            return false;
+        }
+    };
+
     const handleToggle = async () => {
         if (isLoading) return; 
 
         setIsLoading(true);
         const newState = !isOn;
         const previousState = isOn; 
-        let deviceUpdated = false;
-        setIsOn(newState);
+
         try {
-            // 2. Trimite comanda prin socket
             const command = {
                 deviceType: type, 
                 action: newState ? 'on' : 'off',
                 read_now: true
-                // Poți adăuga parametri specifici dacă e necesar
-                // params: { 
-                //   duration: 300, // pentru pompă
-                //   intensity: 100 // pentru lumini
-                // }
             };
 
-            sendCommand(command);            
-            await updateDevice(newState); 
-            deviceUpdated = true;           
-            await postCommand(newState);
-            
-            console.log(`✅ Comandă procesată cu succes pentru ${device.name}:`, command);
-            toast.success(`Comandă trimisă cu succes pentru ${device.name}`);
-            
+            sendCommand(command, async (response) => {
+                try {
+                    if (response.success) {
+                        setIsOn(newState);
+                        await updateDevice(newState);
+                        await postCommand(newState);
+                        console.log(`✅ Comandă procesată cu succes pentru ${device.name}:`, response);
+                        toast.success(`Comandă trimisă cu succes pentru ${device.name}`);
+                    } else {
+                        setIsOn(previousState);
+                        toast.error(`Comandă esuată pentru ${device.name}`);
+                    }
+                } catch (error) {
+                    console.error('Error updating device:', error);
+                    setIsOn(previousState);
+                    toast.error(`Command sent but failed to update device state for ${device.name}`);
+                } finally {
+                    setIsLoading(false);
+                }
+            });
+            toggleOffAutoMode();
+
         } catch (error) {
-            if (!deviceUpdated) {
-                setIsOn(previousState);
-                toast.error(`Comandă esuată pentru ${device.name}`);
-            } else {
-                toast.error(`Command sent but failed to update device state for ${device.name}`);
-            }
-        } finally {
+            console.error('Error in handleToggle:', error);
+            setIsOn(previousState);
+            toast.error(`Comandă esuată pentru ${device.name}`);
             setIsLoading(false);
         }
     };
 
 
-    const formatTypeName = (type: string) => {
-        return type.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    }
+    const formatTypeName = (type: string) => t(`deviceNames.${type}`, type.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
 
     const selectIcon = (typeFirst: string, isOn?: boolean) => {
         switch(typeFirst){
@@ -137,15 +162,13 @@ const ControlCard = ({device}: ControlCardProps) => {
             <div className='card-header'>
                 <div className="left">
                     {selectIcon(typeFirstDisplay, isOn)}
-                    <h4>{device.name}</h4>
+                    <h4>
+                        {t(`deviceNames.${device.name}`, { defaultValue: device.name })}
+                    </h4>
                 </div>
-                {/* <Expand
-                    size='16'
-                    className="expand-icon"
-                /> */}
             </div>
             <div className="card-sub-header">
-                <h5>Device: {formatTypeName(type)} </h5>
+                <h5>{t('deviceLabels.device')}: {formatTypeName(type)} </h5>
             </div>
             <div className='card-body'>
                 <h3 style={{ color: isOn ? "var(--on-color)" : "var(--off-color)" }}>{isOn ? "ON" : "OFF"}</h3>

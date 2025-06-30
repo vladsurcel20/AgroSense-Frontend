@@ -1,4 +1,5 @@
 import { Expand, Thermometer, Droplets, Sun, Waves} from 'lucide-react'
+import { useTranslation } from 'react-i18next';
 import { Sensor } from '../../types/sensor'
 import { minMaxData } from './SensorGrid'
 import { CircularProgress } from '@mui/material';
@@ -11,18 +12,13 @@ interface SensorCardProps{
 }
 
 const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardProps ) => {
+    const { t } = useTranslation();
 
     const {type, unit, localization} = sensor;
     const formatLocalization = localization?.charAt(0).toUpperCase() + localization?.slice(1);
 
-    const formatTypeName = (type: string): string => {
-        return type
-            .split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    };
-
-     const formatType = formatTypeName(type)
+    const formatType = t(`deviceNames.${type}`, `${type.charAt(0).toUpperCase() + type.slice(1)} ${t('sensor')}`);
+    const formatLocalizationLabel = localization ? t(`sensorLocalization.${localization}`, localization.charAt(0).toUpperCase() + localization.slice(1)) : '';
 
     const selectIcon = (type: string) => {
         switch(type){
@@ -46,7 +42,7 @@ const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardPr
             <div className='card-header'>
                 <div className="left">
                     {selectIcon(type)}
-                    <h4>{formatType} {formatLocalization ? formatLocalization : ''}</h4>
+                    <h4>{formatType} {formatLocalizationLabel ? formatLocalizationLabel : ''}</h4>
                 </div>
                 <Expand
                     size='16'
@@ -57,10 +53,10 @@ const SensorCard = ({sensor, value, setExpandedSensor, minMaxData}: SensorCardPr
                 />
             </div>
             <div className="card-sub-header">
-                <h5>Device: {sensor.name} </h5>
+                <h5>{t('deviceLabels.device')}: {sensor.name.replace(/^sensor(\d*)/i, `${t('sensor')}$1`)} </h5>
             </div>
             <div className='card-body'>
-                {value  ? (
+                {value !== undefined ? (
                     <h1 style={ type!=="water_level" ? {color: `var(--${type}-color)`} : {color: `var(--humidity-color)`}}>
                         {value}{unit}
                     </h1>

@@ -3,8 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { Search, MapPin, House } from "lucide-react";
 import { useDashboard } from "../../contexts/DashboardContext";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 const BreadcrumbNav = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const {
     currentLocation,
@@ -30,20 +32,20 @@ const BreadcrumbNav = () => {
 
   const pathnames = location.pathname
     .split("/")
-    .filter((x) => x && x !== "dashboard");
+    .filter((x) => x && x !== "breadcrumb");
 
   const lastPath = pathnames[pathnames.length - 1];
 
   const mapping: { [key: string]: string } = {
-    location: "Locations",
-    greenhouse: "Greenhouses",
-    sensors: "Sensors",
+    location: t("breadcrumb.mapping.location"),
+    greenhouse: t("breadcrumb.mapping.greenhouse"),
+    sensors: t("breadcrumb.mapping.sensors"),
   };
 
   const description: { [key: string]: string } = {
-    location: "Choose a location to view your greenhouses",
-    greenhouse: "Choose a greenhouse to view sensors and controls",
-    sensors: "Explore real-time sensor data and automation",
+    location: t("breadcrumb.description.location"),
+    greenhouse: t("breadcrumb.description.greenhouse"),
+    sensors: t("breadcrumb.description.sensors"),
   };
 
   const icons: { [key: string]: JSX.Element } = {
@@ -52,8 +54,8 @@ const BreadcrumbNav = () => {
   };
 
   const placeholder: { [key: string]: string } = {
-    location: "Search locations..",
-    greenhouse: "Search greenhouses or crops..",
+    location: t("breadcrumb.placeholder.location"),
+    greenhouse: t("breadcrumb.placeholder.greenhouse"),
   };
 
   const formatPathName = (text: string) => {
@@ -68,8 +70,8 @@ const BreadcrumbNav = () => {
 
     if (pathnames.includes("location")) {
       items.push(
-        <Link key="location" to="/dashboard/location">
-          Locations
+        <Link key="location" to="/breadcrumb/location">
+          {t("breadcrumb.mapping.location")}
         </Link>
       );
     }
@@ -77,8 +79,8 @@ const BreadcrumbNav = () => {
     if (pathnames.includes("greenhouse") && currentLocation) {
       items.push(<span key="loc-name">{currentLocation.name}</span>);
       items.push(
-        <Link key="greenhouse" to="/dashboard/location/greenhouse">
-          Greenhouses
+        <Link key="greenhouse" to="/breadcrumb/location/greenhouse">
+          {t("breadcrumb.mapping.greenhouse")}
         </Link>
       );
     }
@@ -95,10 +97,10 @@ const BreadcrumbNav = () => {
       return currentGreenhouse.name;
     }
     if (lastPath === "greenhouse" && currentLocation) {
-      return "Select Greenhouse";
+      return t("breadcrumb.title.greenhouse");
     }
     if (lastPath === "location") {
-      return "Select Location";
+      return t("breadcrumb.title.location");
     }
 
     return formatPathName(lastPath);

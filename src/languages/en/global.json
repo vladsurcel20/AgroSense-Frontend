@@ -1,0 +1,149 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "language": "Language",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "profile": "Profile",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "help": "Help",
+    "greeting": "Welcome back!"
+  },
+  "breadcrumb": {
+    "description": {
+      "location": "Choose a location to view your greenhouses",
+      "greenhouse": "Choose a greenhouse to view sensors and controls",
+      "sensors": "Explore real-time sensor data and automation"
+    },
+    "placeholder": {
+      "location": "Search locations..",
+      "greenhouse": "Search greenhouses or crops.."
+    },
+    "mapping": {
+      "location": "Locations",
+      "greenhouse": "Greenhouses",
+      "sensors": "Sensors"
+    },
+    "title": {
+      "location": "Select Location",
+      "greenhouse": "Select Greenhouse"
+    }
+  },
+  "auth": {
+    "loginTitle": "Log in to your account",
+    "loginWelcome": "Welcome back!",
+    "loginEmail": "Email",
+    "loginPassword": "Password",
+    "loginRemember": "Remember me",
+    "loginForgot": "Forgot password",
+    "loginButton": "Log in",
+    "loginNoAccount": "Don't have an account?",
+    "loginCreateAccount": "Create an account",
+
+    "signupTitle": "Create a new account",
+    "signupAlready": "Already have an account?",
+    "signupLogin": "Log in",
+    "signupFirstName": "First Name",
+    "signupLastName": "Last Name",
+    "signupEmail": "Email",
+    "signupPassword": "Password",
+    "signupRetypedPassword": "Retyped Password",
+    "signupButton": "Create account"
+  },
+  "locationCard": {
+    "greenhouses": "Greenhouses",
+    "lastVisited": "Last visited:",
+    "selectLocation": "Select location"
+  },
+  "greenhouseCard": {
+    "lastVisited": "Last Visited:",
+    "never": "never",
+    "sensors": "Sensors:",
+    "controls": "Controls:",
+    "viewDashboard": "View dashboard"
+  },
+  "controlsTab": "Controls",
+  "sensorsTab": "Sensors",
+  "automationTab": "Automation",
+  "controlsTabDescription": "Control your devices and actuators.",
+  "sensorsTabDescription": "Monitor the current readings of your sensors.",
+  "automationTabDescription": "Define optimal ranges for your greenhouse parameters.",
+  "cancel": "Cancel",
+  "saveChanges": "Save Changes",
+  "editThresholds": "Edit Thresholds",
+  "enableAutoMode": "Enable Auto Mode",
+  "disableAutoMode": "Disable Auto Mode",
+
+  "prediction": "Prediction",
+  "currentValue": "Current Value",
+  "hours": "Hours",
+  "days": "Days",
+  "predictionText": "Prediction for the next {{hours}} hours",
+  "predictionUnavailable": "No predictions available for this sensor.",
+  "sensor": "Sensor",
+
+  "deviceNames": {
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "light": "Light",
+    "water_level": "Water Level",
+    "fan": "Fan",
+    "water_pump": "Water Pump",
+    "Irrigation": "Irrigation",
+    "Lighting": "Lighting",
+    "Ventilation": "Ventilation"
+  },
+  "sensorLocalization": {
+    "air": "Air",
+    "soil": "Soil"
+  },
+  "deviceLabels": {
+    "device": "Device"
+  },
+  "thresholdLabels": {
+    "min": "Min",
+    "max": "Max"
+  },
+  "landing": {
+    "heroTitle": "Smart Monitoring for Modern Agriculture",
+    "heroDescription": "Monitor and control your greenhouse environment with precision. Optimize growing conditions and increase yields with AgroSense.",
+    "getStarted": "Get Started",
+    "seeDemo": "See Demo",
+    "featuresTitle": "Optimize Your Growing Environment",
+    "featuresDescription": "AgroSense provides you with the tools you need to monitor and control your greenhouse operations for maximum efficiency.",
+    "featureMonitoringTitle": "Environmental Monitoring",
+    "featureMonitoringDesc": "Track temperature, humidity, light, CO₂ levels and more in real-time with precision sensors.",
+    "featureAutomationTitle": "Automated Controls",
+    "featureAutomationDesc": "Set up automated systems to maintain optimal growing conditions without manual intervention.",
+    "featureAnalyticsTitle": "Analytics & Insights",
+    "featureAnalyticsDesc": "Get detailed reports and insights to optimize growing conditions and increase yields.",
+    "featureAlertTitle": "Alert System",
+    "featureAlertDesc": "Receive alerts when conditions fall outside optimal ranges to prevent crop loss.",
+    "ctaTitle": "Ready to optimize your greenhouse operations?",
+    "ctaDescription": "Join thousands of growers who are improving yields and reducing costs with AgroSense.",
+    "contactSales": "Contact Sales"
+  },
+  "footer": {
+    "description": "Smart monitoring solutions for modern agriculture.",
+    "solutionsTitle": "Solutions",
+    "solutionsGreenhouse": "Greenhouse Monitoring",
+    "solutionsHydroponics": "Hydroponics",
+    "solutionsVertical": "Vertical Farming",
+    "companyTitle": "Company",
+    "companyAbout": "About Us",
+    "companyContact": "Contact",
+    "companyCareers": "Careers",
+    "companyBlog": "Blog",
+    "legalTitle": "Legal",
+    "legalPrivacy": "Privacy Policy",
+    "legalTerms": "Terms & Conditions",
+    "copyright": "© {{year}} AgroSense. All rights reserved.",
+    "socialTwitter": "Twitter",
+    "socialLinkedIn": "LinkedIn",
+    "socialFacebook": "Facebook"
+  }
+}

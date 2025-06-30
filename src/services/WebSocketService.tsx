@@ -39,9 +39,18 @@ export function useSocket() {
     };
   }, []);
 
-  const sendCommand = (command: any) => {
-    socketRef.current?.emit("control_device", command);
-  };
+  // const sendCommand = (command: any) => {
+  //   socketRef.current?.emit("control_device", command);
+  // };
 
-  return { sendCommand };
+  const sendCommand = (command: any, callback: (response: { success: boolean; command?: string; error?: string }) => void) => {
+  if (!socketRef.current) {
+    callback({ success: false, error: 'Socket not connected' });
+    return;
+  }
+
+  socketRef.current.emit("control_device", command, callback);
+};
+
+  return { sendCommand, socket: socketRef.current };
 }

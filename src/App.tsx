@@ -22,7 +22,6 @@ const App = () => {
               <Dashboard />
             </DashboardProvider>
           } >
-            {/* <Route index element={<Navigate to="location" />} /> */}
             <Route path="location" element={<LocationsGrid />} />
             <Route path="location/greenhouse" element={<GreenhousesGrid />} />
             <Route path="location/greenhouse/sensors" element={<ControlsGrid />} />

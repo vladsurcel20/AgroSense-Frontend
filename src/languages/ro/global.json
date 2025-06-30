@@ -1,0 +1,176 @@
+{
+  "navbar": {
+    "home": "Acasă",
+    "about": "Despre",
+    "contact": "Contact",
+    "language": "Limba",
+    "logout": "Deconectare",
+    "login": "Conectare",
+    "register": "Înregistrare",
+    "profile": "Profil",
+    "settings": "Setări",
+    "dashboard": "Tablou de bord",
+    "help": "Ajutor",
+  "greeting": "Bine ai revenit!"
+  },
+  "breadcrumb": {
+    "description": {
+      "location": "Alege o locație pentru a vedea serele tale",
+      "greenhouse": "Alege o seră pentru a vedea senzorii și dispozitivele de control",
+      "sensors": "Explorează datele în timp real ale senzorilor și automatizarea"
+    },
+    "placeholder": {
+      "location": "Caută locații..",
+      "greenhouse": "Caută sere sau culturi.."
+    },
+    "mapping": {
+      "location": "Locații",
+      "greenhouse": "Sere",
+      "sensors": "Senzori"
+    },
+    "title": {
+      "location": "Selectează locația",
+      "greenhouse": "Selectează sera"
+    }
+  },
+  "auth": {
+    "loginTitle": "Intră în contul tău",
+    "loginWelcome": "Bine ai revenit!",
+    "loginEmail": "Email",
+    "loginPassword": "Parolă",
+    "loginRemember": "Ține-mă minte",
+    "loginForgot": "Ai uitat parola?",
+    "loginButton": "Autentificare",
+    "loginNoAccount": "Nu ai cont?",
+    "loginCreateAccount": "Creează un cont",
+
+    "signupTitle": "Creează un cont nou",
+    "signupAlready": "Ai deja un cont?",
+    "signupLogin": "Autentifică-te",
+    "signupFirstName": "Prenume",
+    "signupLastName": "Nume",
+    "signupEmail": "Email",
+    "signupPassword": "Parolă",
+    "signupRetypedPassword": "Confirmă parola",
+    "signupButton": "Creează cont"
+  },
+  "locationCard": {
+    "greenhouses": "Sere",
+    "lastVisited": "Ultima vizită:",
+    "selectLocation": "Selectează locația"
+  },
+  "greenhouseCard": {
+    "lastVisited": "Ultima vizită:",
+    "never": "niciodată",
+    "sensors": "Senzori:",
+    "controls": "Dispozitive de control:",
+    "viewDashboard": "Vezi tabloul de bord"
+  },
+  "controlsTab": "Control",
+  "sensorsTab": "Senzori",
+  "automationTab": "Automatizare",
+  "controlsTabDescription": "Controlează dispozitivele și actuatoarele.",
+  "sensorsTabDescription": "Monitorizează valorile curente ale senzorilor.",
+  "automationTabDescription": "Definește intervale optime pentru parametrii serei.",
+  "cancel": "Renunță",
+  "saveChanges": "Salvează modificările",
+  "editThresholds": "Editează pragurile",
+  "enableAutoMode": "Activează modul automat",
+  "disableAutoMode": "Dezactivează modul automat",
+
+  "prediction": "Predicție",
+  "currentValue": "Valoare curentă",
+  "hours": "Ore",
+  "days": "Zile",
+  "predictionText": "Predicție pentru următoarele {{hours}} ore",
+  "predictionUnavailable": "Nu sunt disponibile predicții pentru acest senzor.",
+  "sensor": "Senzor",
+
+  "deviceNames": {
+    "temperature": "Temperatură",
+    "humidity": "Umiditate",
+    "light": "Lumină",
+    "water_level": "Nivel apă",
+    "fan": "Ventilator",
+    "water_pump": "Pompă de apă",
+    "Irrigation": "Irigare",
+    "Lighting": "Iluminat",
+    "Ventilation": "Ventilație"
+  },
+  "sensorLocalization": {
+    "air": "Aer",
+    "soil": "Sol"
+  },
+  "deviceLabels": {
+    "device": "Dispozitiv"
+  },
+  "thresholdLabels": {
+    "min": "Minim",
+    "max": "Maxim"
+  },
+  "landing": {
+    "heroTitle": "Monitorizare inteligentă pentru agricultura modernă",
+    "heroDescription": "Monitorizează și controlează mediul din sera ta cu precizie. Optimizează condițiile de creștere și crește randamentul cu AgroSense.",
+    "getStarted": "Începe",
+    "seeDemo": "Vezi Demo",
+    "featuresTitle": "Optimizează mediul de creștere",
+    "featuresDescription": "AgroSense îți oferă uneltele necesare pentru a monitoriza și controla operațiunile din sera ta pentru eficiență maximă.",
+    "featureMonitoringTitle": "Monitorizare a mediului",
+    "featureMonitoringDesc": "Urmărește temperatura, umiditatea, lumina, nivelul de CO₂ și multe altele în timp real cu senzori de precizie.",
+    "featureAutomationTitle": "Controale automatizate",
+    "featureAutomationDesc": "Configurează sisteme automate pentru a menține condiții optime de creștere fără intervenție manuală.",
+    "featureAnalyticsTitle": "Analize și statistici",
+    "featureAnalyticsDesc": "Obții rapoarte detaliate și statistici pentru a optimiza condițiile și a crește randamentul.",
+    "featureAlertTitle": "Sistem de alertă",
+    "featureAlertDesc": "Primești alerte când condițiile ies din intervalele optime pentru a preveni pierderile.",
+    "ctaTitle": "Ești pregătit să optimizezi operațiunile din sera ta?",
+    "ctaDescription": "Alătură-te miilor de cultivatori care își îmbunătățesc randamentele și reduc costurile cu AgroSense.",
+    "contactSales": "Contactează vânzări",
+    "footer": {
+      "solutionsTitle": "Soluții",
+      "companyTitle": "Companie",
+      "legalTitle": "Legal",
+      "solutions": {
+        "greenhouse": "Monitorizare Sera",
+        "hydroponics": "Hidroponie",
+        "verticalFarming": "Agricultură Verticală"
+      },
+      "company": {
+        "about": "Despre Noi",
+        "contact": "Contact",
+        "careers": "Cariere",
+        "blog": "Blog"
+      },
+      "legal": {
+        "privacy": "Politica de Confidențialitate",
+        "terms": "Termeni și Condiții"
+      },
+      "copyright": "© {{year}} AgroSense. Toate drepturile rezervate.",
+      "description": "Soluții inteligente de monitorizare pentru agricultura modernă.",
+      "social": {
+        "twitter": "Twitter",
+        "linkedin": "LinkedIn",
+        "facebook": "Facebook"
+      }
+    }
+  },
+  "footer": {
+    "description": "Soluții inteligente de monitorizare pentru agricultura modernă.",
+    "solutionsTitle": "Soluții",
+    "solutionsGreenhouse": "Monitorizare Sera",
+    "solutionsHydroponics": "Hidroponie",
+    "solutionsVertical": "Agricultură Verticală",
+    "companyTitle": "Companie",
+    "companyAbout": "Despre Noi",
+    "companyContact": "Contact",
+    "companyCareers": "Cariere",
+    "companyBlog": "Blog",
+    "legalTitle": "Legal",
+    "legalPrivacy": "Politica de Confidențialitate",
+    "legalTerms": "Termeni și Condiții",
+    "copyright": "© {{year}} AgroSense. Toate drepturile rezervate.",
+    "socialTwitter": "Twitter",
+    "socialLinkedIn": "LinkedIn",
+    "socialFacebook": "Facebook"
+  }
+}

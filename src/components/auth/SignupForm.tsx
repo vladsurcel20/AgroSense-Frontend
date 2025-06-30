@@ -3,6 +3,7 @@ import { Box, InputAdornment, TextField, Tooltip } from '@mui/material'
 import styles from '../../pages/Auth.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from "react-i18next";
 
 interface Props{
     handleSectionChange: () => void
@@ -16,22 +17,24 @@ interface Props{
   }
 
 const SignupForm = ({handleSectionChange, setFirstName, setLastName, setEmail, setPassword, setRetypedPassword, handleSubmitRegister, formatName}: Props) => {
-
+  const { t } = useTranslation();
 const [showPassword, setShowPassword] = useState<boolean>(false)
 const [showRetypedPassword, setShowRetypedPassword] = useState(false);
 
   
   return (
     <div className={styles.formContainer}>
-        <h1>Create a new account</h1>
-        <h2 className={styles.secondaryText}>Already have an account? <span className={styles.actionText} onClick={handleSectionChange}>Log in</span></h2>
+      <h1>{t("auth.signupTitle")}</h1>
+      <h2 className={styles.secondaryText}>
+        {t("auth.signupAlready")} <span className={styles.actionText} onClick={handleSectionChange}>{t("auth.signupLogin")}</span>
+      </h2>
 
         <form className={styles.form}>
           <Box display='flex' flexDirection='row' justifyContent='space-between'>
             <TextField
             id="firstName-input"
             type= "text"
-            label="Last Name"
+            label={t("auth.signupFirstName")}
             autoComplete='family-name'
             variant="outlined"
             size='small'
@@ -64,7 +67,7 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             <TextField
             id="lastName-input"
             type= "text"
-            label="First Name"
+            label={t("auth.signupLastName")}
             autoComplete='given-name'
             variant="outlined"
             size='small'
@@ -98,7 +101,7 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             <TextField
             id="email-input"
             type= "email"
-            label="Email"
+            label={t("auth.signupEmail")}
             autoComplete='email'
             variant="outlined"
             fullWidth
@@ -130,7 +133,7 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
 
             <TextField
             id="password-input"
-            label="Password"
+            label={t("auth.signupPassword")}
             type = {!showPassword ? "password" : "text"}
             autoComplete="current-password"
             variant="outlined"
@@ -177,7 +180,7 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
 
             <TextField
             id="re-password-input"
-            label="Retyped Password"
+            label={t("auth.signupRetypedPassword")}
             type = {!showRetypedPassword ? "password" : "text"}
             autoComplete="current-password"
             variant="outlined"
@@ -222,7 +225,7 @@ const [showRetypedPassword, setShowRetypedPassword] = useState(false);
             }}
             />
 
-            <button className={styles.submitButton} type='submit' onClick={handleSubmitRegister}>Create account</button>
+            <button className={styles.submitButton} type='submit' onClick={handleSubmitRegister}>{t("auth.signupButton")}</button>
         </form>
     </div>
   )

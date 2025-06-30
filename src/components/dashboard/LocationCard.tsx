@@ -2,15 +2,17 @@ import { Leaf } from "lucide-react"
 import { useDashboard } from "../../contexts/DashboardContext"
 import { useNavigate, useLocation } from 'react-router-dom'
 import { formatDistanceToNow } from 'date-fns'
+import { ro, enUS } from 'date-fns/locale'
 import axios, { AxiosError } from "axios"
 import { Location } from "../../types/location"
+import { useTranslation } from "react-i18next";
 
 interface LocationCardProps {
     locationData: Location
 }
 
 const LocationCard = ({locationData}: LocationCardProps) => {
-
+    const { t, i18n } = useTranslation();
     const { setCurrentLocation } = useDashboard()
     const navigate = useNavigate()
     const location = useLocation()
@@ -36,6 +38,8 @@ const LocationCard = ({locationData}: LocationCardProps) => {
         navigate(pathname + "/greenhouse")
     }
 
+    const locale = i18n.language === "ro" ? ro : enUS;
+
   return (
     <div className="card location-card">
         <div className="card-header">
@@ -47,17 +51,20 @@ const LocationCard = ({locationData}: LocationCardProps) => {
         </div>
         <div className="card-body">
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-                <p>Greenhouses:</p>
+                <p>{t("locationCard.greenhouses")}</p>
                 <p>{locationData.greenhouseCount}</p>
             </div>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-                <p>Last visited:</p>
-                <p>{formatDistanceToNow(new Date(locationData.lastVisited), { addSuffix: true }).replace('about ', '')}</p>
+                <p>{t("locationCard.lastVisited")}</p>
+                <p>{formatDistanceToNow(new Date(locationData.lastVisited), { addSuffix: true, locale })
+                    .replace('about ', '')
+                    .replace('circa ', '')}
+                </p>
             </div>
         </div>
 
         <div className="card-footer">
-            <button className="main-btn" onClick={selectLocation}>Select location</button>
+            <button className="main-btn" onClick={selectLocation}>{t("locationCard.selectLocation")}</button>
         </div>
     </div>
   )

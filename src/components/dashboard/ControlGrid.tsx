@@ -36,7 +36,7 @@ const ControlGrid = () => {
   return (
     <>
       <div className='sensor-cards-grid'>
-        {devices.map((device) => (
+        {devices.filter(d => d.name !== "Lighting").map((device) => (
           <ControlCard
             key={device.id}
             device={device}

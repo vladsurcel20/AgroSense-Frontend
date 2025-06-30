@@ -1,7 +1,9 @@
 import { ArrowRight, BarChart3, Leaf, ShieldCheck, Zap } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Navbar from "../components/shared/Navbar";
 
 export default function LandingPage() {
+  const { t } = useTranslation();
   return (
     <>
     <Navbar />
@@ -13,18 +15,17 @@ export default function LandingPage() {
           <div className="agro-hero-grid">
             <div className="agro-hero-content">
               <h1 className="agro-hero-title">
-                Smart Monitoring for Modern Agriculture
+                {t("landing.heroTitle")}
               </h1>
               <p className="agro-hero-description">
-                Monitor and control your greenhouse environment with precision. Optimize growing conditions and increase
-                yields with AgroSense.
+                {t("landing.heroDescription")}
               </p>
               <div className="agro-button-group">
                 <a href="/dashboard/location" className="agro-button agro-button-primary">
-                  Get Started <ArrowRight className="agro-icon" />
+                  {t("landing.getStarted")} <ArrowRight className="agro-icon" />
                 </a>
                 <a href="/demo" className="agro-button agro-button-outline">
-                  See Demo
+                  {t("landing.seeDemo")}
                 </a>
               </div>
             </div>
@@ -66,10 +67,9 @@ export default function LandingPage() {
       <section className="agro-features-section">
         <div className="agro-container">
           <div className="agro-features-header">
-            <h2 className="agro-section-title">Optimize Your Growing Environment</h2>
+            <h2 className="agro-section-title">{t("landing.featuresTitle")}</h2>
             <p className="agro-section-description">
-              AgroSense provides you with the tools you need to monitor and control your greenhouse operations for
-              maximum efficiency.
+              {t("landing.featuresDescription")}
             </p>
           </div>
 
@@ -78,9 +78,9 @@ export default function LandingPage() {
               <div className="agro-feature-icon agro-feature-icon-primary">
                 <Leaf className="agro-icon" />
               </div>
-              <h3 className="agro-feature-title">Environmental Monitoring</h3>
+              <h3 className="agro-feature-title">{t("landing.featureMonitoringTitle")}</h3>
               <p className="agro-feature-description">
-                Track temperature, humidity, light, CO₂ levels and more in real-time with precision sensors.
+                {t("landing.featureMonitoringDesc")}
               </p>
             </div>
 
@@ -88,9 +88,9 @@ export default function LandingPage() {
               <div className="agro-feature-icon agro-feature-icon-secondary">
                 <Zap className="agro-icon" />
               </div>
-              <h3 className="agro-feature-title">Automated Controls</h3>
+              <h3 className="agro-feature-title">{t("landing.featureAutomationTitle")}</h3>
               <p className="agro-feature-description">
-                Set up automated systems to maintain optimal growing conditions without manual intervention.
+                {t("landing.featureAutomationDesc")}
               </p>
             </div>
 
@@ -98,9 +98,9 @@ export default function LandingPage() {
               <div className="agro-feature-icon agro-feature-icon-accent">
                 <BarChart3 className="agro-icon" />
               </div>
-              <h3 className="agro-feature-title">Analytics & Insights</h3>
+              <h3 className="agro-feature-title">{t("landing.featureAnalyticsTitle")}</h3>
               <p className="agro-feature-description">
-                Get detailed reports and insights to optimize growing conditions and increase yields.
+                {t("landing.featureAnalyticsDesc")}
               </p>
             </div>
 
@@ -108,9 +108,9 @@ export default function LandingPage() {
               <div className="agro-feature-icon agro-feature-icon-muted">
                 <ShieldCheck className="agro-icon" />
               </div>
-              <h3 className="agro-feature-title">Alert System</h3>
+              <h3 className="agro-feature-title">{t("landing.featureAlertTitle")}</h3>
               <p className="agro-feature-description">
-                Receive alerts when conditions fall outside optimal ranges to prevent crop loss.
+                {t("landing.featureAlertDesc")}
               </p>
             </div>
           </div>
@@ -122,16 +122,16 @@ export default function LandingPage() {
         <div className="agro-container">
           <div className="agro-cta-card">
             <div className="agro-cta-content">
-              <h2 className="agro-cta-title">Ready to optimize your greenhouse operations?</h2>
+              <h2 className="agro-cta-title">{t("landing.ctaTitle")}</h2>
               <p className="agro-cta-description">
-                Join thousands of growers who are improving yields and reducing costs with AgroSense.
+                {t("landing.ctaDescription")}
               </p>
               <div className="agro-button-group">
                 <a href="/dashboard/location" className="agro-button agro-button-primary">
-                  Get Started <ArrowRight className="agro-icon" />
+                  {t("landing.getStarted")} <ArrowRight className="agro-icon" />
                 </a>
                 <a href="/contact" className="agro-button agro-button-outline">
-                  Contact Sales
+                  {t("landing.contactSales")}
                 </a>
               </div>
             </div>
@@ -150,67 +150,67 @@ export default function LandingPage() {
                 </div>
                 <span className="agro-logo-text">AgroSense</span>
               </div>
-              <p className="agro-footer-description">Smart monitoring solutions for modern agriculture.</p>
+              <p className="agro-footer-description">{t("footer.description")}</p>
             </div>
 
             <div className="agro-footer-column">
-              <h4 className="agro-footer-title">Solutions</h4>
+              <h4 className="agro-footer-title">{t("footer.solutionsTitle")}</h4>
               <ul className="agro-footer-list">
                 <li>
                   <a href="/solutions/greenhouse" className="agro-footer-link">
-                    Greenhouse Monitoring
+                    {t("footer.solutionsGreenhouse")}
                   </a>
                 </li>
                 <li>
                   <a href="/solutions/hydroponics" className="agro-footer-link">
-                    Hydroponics
+                    {t("footer.solutionsHydroponics")}
                   </a>
                 </li>
                 <li>
                   <a href="/solutions/vertical-farming" className="agro-footer-link">
-                    Vertical Farming
+                    {t("footer.solutionsVertical")}
                   </a>
                 </li>
               </ul>
             </div>
 
             <div className="agro-footer-column">
-              <h4 className="agro-footer-title">Company</h4>
+              <h4 className="agro-footer-title">{t("footer.companyTitle")}</h4>
               <ul className="agro-footer-list">
                 <li>
                   <a href="/about" className="agro-footer-link">
-                    About Us
+                    {t("footer.companyAbout")}
                   </a>
                 </li>
                 <li>
                   <a href="/contact" className="agro-footer-link">
-                    Contact
+                    {t("footer.companyContact")}
                   </a>
                 </li>
                 <li>
                   <a href="/careers" className="agro-footer-link">
-                    Careers
+                    {t("footer.companyCareers")}
                   </a>
                 </li>
                 <li>
                   <a href="/blog" className="agro-footer-link">
-                    Blog
+                    {t("footer.companyBlog")}
                   </a>
                 </li>
               </ul>
             </div>
 
             <div className="agro-footer-column">
-              <h4 className="agro-footer-title">Legal</h4>
+              <h4 className="agro-footer-title">{t("footer.legalTitle")}</h4>
               <ul className="agro-footer-list">
                 <li>
                   <a href="/privacy" className="agro-footer-link">
-                    Privacy Policy
+                    {t("footer.legalPrivacy")}
                   </a>
                 </li>
                 <li>
                   <a href="/terms" className="agro-footer-link">
-                    Terms of Service
+                    {t("footer.legalTerms")}
                   </a>
                 </li>
               </ul>
@@ -219,23 +219,23 @@ export default function LandingPage() {
 
           <div className="agro-footer-bottom">
             <p className="agro-copyright">
-              © {new Date().getFullYear()} AgroSense. All rights reserved.
+              {t("footer.copyright", { year: new Date().getFullYear() })}
             </p>
             <div className="agro-social-links">
               <a href="#" className="agro-social-link">
-                <span className="agro-visually-hidden">Twitter</span>
+                <span className="agro-visually-hidden">{t("footer.socialTwitter")}</span>
                 <svg className="agro-social-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
                 </svg>
               </a>
               <a href="#" className="agro-social-link">
-                <span className="agro-visually-hidden">LinkedIn</span>
+                <span className="agro-visually-hidden">{t("footer.socialLinkedIn")}</span>
                 <svg className="agro-social-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.454C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path>
                 </svg>
               </a>
               <a href="#" className="agro-social-link">
-                <span className="agro-visually-hidden">Facebook</span>
+                <span className="agro-visually-hidden">{t("footer.socialFacebook")}</span>
                 <svg className="agro-social-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     fillRule="evenodd"
